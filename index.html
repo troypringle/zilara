@@ -460,24 +460,30 @@
       width: 42px;
       height: 42px;
       border-radius: 999px;
-      background: rgba(255, 30, 138, 0.18);
-      border: 1.5px solid rgba(255, 119, 186, 0.68);
+      background: rgba(16, 185, 129, 0.16);
+      border: 1.5px solid #34d399;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 16px rgba(255, 30, 138, 0.45);
+      box-shadow:
+        0 0 16px rgba(16, 185, 129, 0.72),
+        inset 0 0 10px rgba(52, 211, 153, 0.35);
+      animation: emeraldGlowPulse 2.2s ease-in-out infinite;
     }
 
     .chat-avatar-dot {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 11px;
-      height: 11px;
+      bottom: -1px;
+      right: -1px;
+      width: 12px;
+      height: 12px;
       border-radius: 999px;
-      background: #ff77ba;
-      border: 2px solid #140d20;
-      box-shadow: 0 0 8px #ff1e8a;
+      background: #10b981;
+      border: 2px solid #0d1614;
+      box-shadow:
+        0 0 10px #10b981,
+        0 0 18px #34d399;
+      animation: emeraldDotPulse 1.6s ease-in-out infinite;
     }
 
     .chat-title-row {
@@ -503,7 +509,8 @@
     .chat-online {
       font-size: 0.78rem;
       font-weight: 700;
-      color: #ff77ba;
+      color: #34d399;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.75);
     }
 
     /* Larger, Bold, Highlighted Neon-Pink Pill Badge */
@@ -534,16 +541,110 @@
 
     .live-badge {
       flex-shrink: 0;
-      padding: 5px 12px;
+      padding: 5px 13px;
       border-radius: 999px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #ffb0d8;
-      background: rgba(255, 30, 138, 0.24);
-      border: 1px solid rgba(255, 119, 186, 0.65);
-      box-shadow: 0 0 14px rgba(255, 30, 138, 0.32);
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.16);
+      border: 1.5px solid #10b981;
+      box-shadow:
+        0 0 14px rgba(16, 185, 129, 0.7),
+        inset 0 0 8px rgba(52, 211, 153, 0.3);
+      text-shadow: 0 0 8px rgba(52, 211, 153, 0.85);
+      animation: emeraldGlowPulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes emeraldGlowPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 12px rgba(16, 185, 129, 0.62),
+          inset 0 0 8px rgba(52, 211, 153, 0.25);
+      }
+      50% {
+        box-shadow:
+          0 0 22px rgba(16, 185, 129, 0.95),
+          0 0 34px rgba(52, 211, 153, 0.55),
+          inset 0 0 12px rgba(52, 211, 153, 0.45);
+      }
+    }
+
+    @keyframes emeraldDotPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 8px #10b981, 0 0 14px #34d399;
+      }
+      50% {
+        transform: scale(1.18);
+        box-shadow: 0 0 14px #10b981, 0 0 24px #34d399;
+      }
+    }
+
+    /* Live Typing Indicator & Blinking Caret */
+    .typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 2px;
+    }
+
+    .typing-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #ff77ba;
+      box-shadow: 0 0 8px rgba(255, 30, 138, 0.75);
+      animation: typingDotBounce 1.1s ease-in-out infinite;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.18s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.36s;
+    }
+
+    @keyframes typingDotBounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.45;
+      }
+      30% {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+    }
+
+    .typing-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      margin-left: 2px;
+      vertical-align: -0.15em;
+      background-color: #ff77ba;
+      box-shadow: 0 0 8px #ff1e8a;
+      animation: caretBlink 0.75s step-end infinite;
+    }
+
+    @keyframes caretBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .chips-wrap.chips-hidden {
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+    }
+
+    .chips-wrap.chips-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
     .chat-feed {
@@ -1033,7 +1134,7 @@
         <div class="chat-header">
           <div class="chat-header-left">
             <div class="chat-avatar" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF77BA">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#34D399">
                 <path d="M13 2L4.09 12.97A1 1 0 004.86 14.5H11l-1 7.5 8.91-10.97a1 1 0 00-.77-1.53H13V2z" />
               </svg>
               <span class="chat-avatar-dot"></span>
@@ -1053,16 +1154,16 @@
 
         <div id="chatFeed" class="chat-feed" aria-live="polite">
           <div class="msg-row-bot">
-            <div class="bubble-bot">
-              Hey! 👋 Quick question — want to see how early <strong style="color:#ffffff;font-weight:800;">FREE</strong> positioning works before spots fill up?
+            <div id="openingBotBubble" class="bubble-bot">
+              <span class="typing-dots" aria-label="Typing"><span></span><span></span><span></span></span>
             </div>
 
-            <div id="quickChips" class="chips-wrap">
+            <div id="quickChips" class="chips-wrap chips-hidden">
               <button type="button" data-topic="product" class="chip-btn">
                 🚀 What's the product line?
               </button>
               <button type="button" data-topic="positioning" class="chip-btn">
-                🔒 How does FREE positioning work?
+                👀 How does FREE positioning work?
               </button>
               <button type="button" data-topic="skip" class="chip-btn chip-btn-skip">
                 ⚡ Skip chat — give me the link!
@@ -1129,6 +1230,54 @@
       var chatFeed = document.getElementById('chatFeed');
       var chatForm = document.getElementById('chatForm');
       var chatInput = document.getElementById('chatInput');
+      var openingBotBubble = document.getElementById('openingBotBubble');
+      var quickChips = document.getElementById('quickChips');
+
+      /* ===================================================================
+         OPENING BOT MESSAGE LIVE TYPING EFFECT
+         =================================================================== */
+      var OPENING_TEXT = 'Hey! 👋 Quick question — want to see how early FREE positioning works before spots fill up?';
+      var OPENING_FINAL_HTML = 'Hey! 👋 Quick question — want to see how early <strong style="color:#ffffff;font-weight:800;">FREE</strong> positioning works before spots fill up?';
+      var typingDone = false;
+      var typingTimer = null;
+
+      function finishOpeningTyping() {
+        if (typingDone) return;
+        typingDone = true;
+        if (typingTimer) clearTimeout(typingTimer);
+        if (openingBotBubble) {
+          openingBotBubble.innerHTML = OPENING_FINAL_HTML;
+        }
+        if (quickChips) {
+          quickChips.classList.remove('chips-hidden');
+          quickChips.classList.add('chips-revealed');
+        }
+      }
+
+      (function runOpeningTyping() {
+        if (!openingBotBubble) return;
+        var chars = Array.from(OPENING_TEXT);
+        var idx = 0;
+
+        // Brief 3-dot typing indicator before characters appear
+        typingTimer = setTimeout(function stepChar() {
+          if (typingDone) return;
+          if (idx <= chars.length) {
+            var slice = chars.slice(0, idx).join('');
+            openingBotBubble.textContent = slice;
+            var caret = document.createElement('span');
+            caret.className = 'typing-caret';
+            caret.setAttribute('aria-hidden', 'true');
+            openingBotBubble.appendChild(caret);
+            idx++;
+            var ch = chars[idx - 1] || '';
+            var delay = (ch === '—' || ch === '!') ? 75 : 22;
+            typingTimer = setTimeout(stepChar, delay);
+          } else {
+            finishOpeningTyping();
+          }
+        }, 520);
+      })();
 
       /* Stop REALTIME flash/enlarge loop as soon as user interacts with chat card */
       function stopRealtimeFlash() {
@@ -1384,12 +1533,12 @@
           user: "🚀 What's the product line?",
           html: "We’re partnering with proven business leaders on a <strong style='color:#ffffff;font-weight:800;'>clean, unique product line</strong> during an early team Pre-Launch wave — and locking in your spot is <strong style='color:#ff77ba;font-weight:800;'>100% FREE</strong>.",
           chips: [
-            { topic: 'positioning', label: '🔒 How does FREE positioning work?' },
+            { topic: 'positioning', label: '👀 How does FREE positioning work?' },
             { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
           ]
         },
         positioning: {
-          user: '🔒 How does FREE positioning work?',
+          user: '👀 How does FREE positioning work?',
           html: "Getting in early is key! 👀 You reserve your <strong style='color:#ff77ba;font-weight:800;'>FREE pre-launch position</strong> at zero cost so you can see the full Team Overview right away.",
           chips: [
             { topic: 'product', label: "🚀 What's the product line?" },
@@ -1410,6 +1559,7 @@
       }
 
       function removeInitialChips() {
+        finishOpeningTyping();
         var chipsEl = document.getElementById('quickChips');
         if (chipsEl && chipsEl.parentNode) {
           chipsEl.parentNode.removeChild(chipsEl);
@@ -1491,7 +1641,7 @@
           html: "It’s <strong style='color:#ff77ba;font-weight:800;'>FREE</strong> to get positioned early in our team Pre-Launch! Tap below to check out the full Team Overview:",
           chips: [
             { topic: 'product', label: "🚀 What's the product line?" },
-            { topic: 'positioning', label: '🔒 How does FREE positioning work?' },
+            { topic: 'positioning', label: '👀 How does FREE positioning work?' },
             { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
           ]
         };
