@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exclusive Team Pre-Launch | Lock In Your Free Position</title>
   <style>
-    /* =====================================================================
-       1. DESIGN TOKENS & BASE RESET (SELF-CONTAINED, ZERO EXTERNAL DEPS)
-       ===================================================================== */
     :root {
       --bg-black: #000000;
       --pink-hot: #ff1e8a;
@@ -23,7 +20,7 @@
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    *, *::before, *::after {
+    *, ::before, ::after {
       box-sizing: border-box;
     }
 
@@ -31,33 +28,36 @@
       width: 100%;
       max-width: 100vw;
       overflow-x: hidden;
-      background-color: #000000;
+      background-color: #09080f;
     }
 
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0px;
+      padding: 0px;
       width: 100%;
       min-height: 100vh;
-      opacity: 1 !important;
-      visibility: visible !important;
       font-family: var(--font-sans);
-      background-color: #000000;
+      background-color: #09080f;
+      background-image:
+        radial-gradient(circle at 12% 14%, rgba(168, 22, 92, 0.38) 0%, rgba(110, 14, 62, 0.16) 34%, transparent 62%),
+        radial-gradient(circle at 88% 22%, rgba(16, 68, 84, 0.42) 0%, rgba(10, 42, 54, 0.18) 38%, transparent 65%),
+        radial-gradient(circle at 84% 85%, rgba(14, 56, 72, 0.32) 0%, transparent 55%),
+        linear-gradient(135deg, #1b0a16 0%, #0b0a12 46%, #091d26 100%);
+      background-attachment: fixed;
       color: var(--text-primary);
       position: relative;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
-    /* =====================================================================
-       2. MAIN RESPONSIVE CONTAINER (DESKTOP MAX-WIDTH 900PX + MOBILE)
-       ===================================================================== */
     .page-shell {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 0px auto;
       padding: 20px 16px 52px;
       display: flex;
       flex-direction: column;
@@ -72,35 +72,33 @@
       }
     }
 
-    /* =====================================================================
-       3. TOP CONDENSED TWO-LINE HEADLINE + EXPAND->SHRINK ENTRANCE
-       ===================================================================== */
     .hero-header {
       position: relative;
       z-index: 20;
       width: 100%;
       text-align: left;
-      padding: 6px 0 2px 38px;
+      padding: 6px 0px 2px 38px;
     }
 
     @media (min-width: 640px) {
       .hero-header {
-        padding: 8px 0 4px 56px;
+        padding: 8px 0px 4px 56px;
       }
     }
 
     .hero-title {
-      margin: 0;
+      margin: 0px;
       font-family: var(--font-condensed);
       font-size: clamp(2rem, 6.2vw, 3.4rem);
       line-height: 0.98;
       letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--text-primary);
+      text-shadow: rgba(255, 30, 138, 0.38) 0px 0px 12px, rgba(0, 0, 0, 0.9) 0px 3px 10px;
       transform-origin: left center;
       opacity: 1;
       transform: scale(1);
-      animation: headlineExpandShrink 1.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal both running headlineExpandShrink;
     }
 
     .hero-title-line {
@@ -108,10 +106,8 @@
     }
 
     .hero-title-pink {
-      color: #ff1e8a;
-      text-shadow:
-        0 0 18px rgba(255, 30, 138, 0.78),
-        0 0 38px rgba(255, 30, 138, 0.45);
+      color: rgb(255, 30, 138);
+      text-shadow: rgba(255, 255, 255, 0.28) 0px 0px 10px, rgba(0, 0, 0, 0.92) 0px 3px 10px;
     }
 
     .hero-emoji {
@@ -122,39 +118,24 @@
     }
 
     @keyframes headlineExpandShrink {
-      0% {
-        opacity: 1;
-        transform: scale(0.9);
-      }
-      44% {
-        opacity: 1;
-        transform: scale(1.16);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 1; transform: scale(0.9); }
+      44% { opacity: 1; transform: scale(1.16); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
-    /* =====================================================================
-       4. PROMOTIONAL BANNER CARD (OBSIDIAN/PLUM/TEAL + STATIONARY ROCKET)
-       ===================================================================== */
     .promo-banner {
       position: relative;
       z-index: 15;
       width: 100%;
       border-radius: 22px;
       padding: 20px 18px;
-      background-color: #0b0914;
+      background-color: rgb(11, 9, 20);
       background-image:
         radial-gradient(circle at 22% 82%, rgba(255, 30, 138, 0.36) 0%, transparent 56%),
         radial-gradient(circle at 86% 24%, rgba(14, 116, 144, 0.28) 0%, transparent 54%),
-        linear-gradient(135deg, #1e0719 0%, #0b0813 52%, #071b24 100%);
-      border: 2px solid #ff1e8a;
-      box-shadow:
-        0 0 30px rgba(255, 30, 138, 0.48),
-        0 22px 54px -14px rgba(0, 0, 0, 0.95),
-        inset 0 0 30px rgba(255, 30, 138, 0.2);
+        linear-gradient(135deg, rgb(30, 7, 25) 0%, rgb(11, 8, 19) 52%, rgb(7, 27, 36) 100%);
+      border: 2px solid rgb(255, 30, 138);
+      box-shadow: rgba(255, 30, 138, 0.48) 0px 0px 30px, rgba(0, 0, 0, 0.95) 0px 22px 54px -14px, rgba(255, 30, 138, 0.2) 0px 0px 30px inset;
       overflow: hidden;
     }
 
@@ -200,7 +181,7 @@
       height: auto;
       display: block;
       overflow: visible;
-      filter: drop-shadow(0 0 18px rgba(255, 30, 138, 0.5));
+      filter: drop-shadow(rgba(255, 30, 138, 0.5) 0px 0px 18px);
     }
 
     .kinetic-stack {
@@ -223,12 +204,12 @@
 
     .kinetic-earn {
       font-size: clamp(1.35rem, 4.2vw, 2.55rem);
-      color: #ffffff;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      color: rgb(255, 255, 255);
+      text-shadow: rgba(255, 30, 138, 0.42) 0px 0px 12px, rgba(0, 0, 0, 0.9) 0px 2px 10px;
     }
 
     .kinetic-streaks {
-      flex: 1;
+      flex: 1 1 0%;
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -237,8 +218,8 @@
     .streak-bar {
       height: 3px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 30, 138, 0.08) 0%, rgba(255, 30, 138, 0.92) 65%, rgba(255, 176, 216, 1) 100%);
-      box-shadow: 0 0 10px rgba(255, 30, 138, 0.72);
+      background: linear-gradient(90deg, rgba(255, 30, 138, 0.08) 0%, rgba(255, 30, 138, 0.92) 65%, rgb(255, 176, 216) 100%);
+      box-shadow: rgba(255, 30, 138, 0.72) 0px 0px 10px;
     }
 
     .streak-bar:nth-child(2) {
@@ -254,44 +235,36 @@
       opacity: 0.78;
     }
 
-    /* REALTIME Flash + Enlarge Loop Until Chat Interaction */
     .kinetic-realtime {
       display: inline-block;
       transform-origin: left center;
       font-size: clamp(2.05rem, 7.6vw, 4.45rem);
-      color: #ff1e8a;
-      text-shadow:
-        0 0 22px rgba(255, 30, 138, 0.82),
-        0 4px 18px rgba(0, 0, 0, 0.85);
-      transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+      color: rgb(255, 30, 138);
+      text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 11px, rgba(0, 0, 0, 0.92) 0px 4px 14px;
+      transition: transform 0.25s, color 0.25s, text-shadow 0.25s;
     }
 
     .kinetic-realtime.is-flashing {
-      animation: realtimeFlashEnlarge 1.1s ease-in-out infinite;
+      animation: 1.1s ease-in-out 0s infinite normal none running realtimeFlashEnlarge;
     }
 
     @keyframes realtimeFlashEnlarge {
       0%, 100% {
         transform: scale(1);
-        color: #ff1e8a;
-        text-shadow:
-          0 0 22px rgba(255, 30, 138, 0.82),
-          0 4px 18px rgba(0, 0, 0, 0.85);
+        color: rgb(255, 30, 138);
+        text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 11px, rgba(0, 0, 0, 0.92) 0px 4px 14px;
       }
       50% {
         transform: scale(1.1);
-        color: #ffffff;
-        text-shadow:
-          0 0 14px #ffffff,
-          0 0 34px rgba(255, 30, 138, 1),
-          0 0 58px rgba(255, 119, 186, 0.98);
+        color: rgb(255, 30, 138);
+        text-shadow: rgba(255, 255, 255, 0.45) 0px 0px 15px, rgba(0, 0, 0, 0.95) 0px 4px 16px;
       }
     }
 
     .kinetic-commissions {
       font-size: clamp(1.3rem, 4.3vw, 2.65rem);
-      color: #ffffff;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      color: rgb(255, 255, 255);
+      text-shadow: rgba(255, 30, 138, 0.42) 0px 0px 12px, rgba(0, 0, 0, 0.9) 0px 2px 10px;
     }
 
     .kinetic-free-row {
@@ -304,24 +277,19 @@
 
     .kinetic-free {
       font-size: clamp(1.85rem, 6.8vw, 3.9rem);
-      color: #ff1e8a;
-      text-shadow:
-        0 0 22px rgba(255, 30, 138, 0.82),
-        0 4px 16px rgba(0, 0, 0, 0.85);
+      color: rgb(255, 30, 138);
+      text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 11px, rgba(0, 0, 0, 0.92) 0px 4px 14px;
     }
 
     .kinetic-to-start {
       font-size: clamp(1.2rem, 3.8vw, 2.3rem);
-      color: #ffffff;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      color: rgb(255, 255, 255);
+      text-shadow: rgba(255, 30, 138, 0.42) 0px 0px 12px, rgba(0, 0, 0, 0.9) 0px 2px 10px;
     }
 
-    /* =====================================================================
-       5. SECOND INTERACTIVE FLYING ROCKET OVERLAY
-       ===================================================================== */
     #rocketFlightLayer {
       position: absolute;
-      inset: 0;
+      inset: 0px;
       z-index: 35;
       pointer-events: none;
       overflow: visible;
@@ -329,17 +297,15 @@
 
     #flyingRocket {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0px;
+      left: 0px;
       width: 76px;
       height: 76px;
       margin-left: -38px;
       margin-top: -38px;
       will-change: transform;
-      filter:
-        drop-shadow(0 0 14px rgba(255, 30, 138, 0.88))
-        drop-shadow(0 0 24px rgba(255, 119, 186, 0.5));
-      transition: filter 0.2s ease;
+      filter: drop-shadow(rgba(255, 30, 138, 0.88) 0px 0px 14px) drop-shadow(rgba(255, 119, 186, 0.5) 0px 0px 24px);
+      transition: filter 0.2s;
     }
 
     @media (min-width: 640px) {
@@ -352,20 +318,16 @@
     }
 
     #flyingRocket.is-hovering {
-      filter:
-        drop-shadow(0 0 18px rgba(255, 30, 138, 0.98))
-        drop-shadow(0 0 32px rgba(255, 119, 186, 0.7));
+      filter: drop-shadow(rgba(255, 30, 138, 0.98) 0px 0px 18px) drop-shadow(rgba(255, 119, 186, 0.7) 0px 0px 32px);
     }
 
     #flyingRocket.is-turbo {
-      filter:
-        drop-shadow(0 0 26px rgba(255, 30, 138, 1))
-        drop-shadow(0 0 46px rgba(255, 176, 216, 0.98));
+      filter: drop-shadow(rgb(255, 30, 138) 0px 0px 26px) drop-shadow(rgba(255, 176, 216, 0.98) 0px 0px 46px);
     }
 
     .flight-flame {
       transform-origin: 50% 0%;
-      animation: flightFlamePulse 0.16s ease-in-out infinite;
+      animation: 0.16s ease-in-out 0s infinite normal none running flightFlamePulse;
     }
 
     #flyingRocket.is-hovering .flight-flame {
@@ -388,23 +350,14 @@
       border-radius: 999px;
       pointer-events: none;
       will-change: transform, opacity;
-      animation: sparkFade 0.62s ease-out forwards;
+      animation: 0.62s ease-out 0s 1 normal forwards running sparkFade;
     }
 
     @keyframes sparkFade {
-      0% {
-        opacity: 0.95;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 14px))) scale(0.15);
-      }
+      0% { opacity: 0.95; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 14px))) scale(0.15); }
     }
 
-    /* =====================================================================
-       6. INTERACTIVE CHAT CARD ("TEAM PRE-LAUNCH LIVE GUIDE", ALL-PINK)
-       ===================================================================== */
     .chat-section {
       position: relative;
       z-index: 20;
@@ -415,11 +368,8 @@
       width: 100%;
       border-radius: 22px;
       background: linear-gradient(165deg, rgba(22, 13, 32, 0.96) 0%, rgba(11, 8, 18, 0.98) 100%);
-      border: 1.5px solid #ff1e8a;
-      box-shadow:
-        0 20px 50px -14px rgba(0, 0, 0, 0.92),
-        0 0 28px rgba(255, 30, 138, 0.26),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgb(255, 30, 138);
+      box-shadow: rgba(0, 0, 0, 0.92) 0px 20px 50px -14px, rgba(255, 30, 138, 0.26) 0px 0px 28px, rgba(255, 255, 255, 0.12) 0px 1px 0px inset;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -451,7 +401,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
+      min-width: 0px;
     }
 
     .chat-avatar {
@@ -461,14 +411,12 @@
       height: 42px;
       border-radius: 999px;
       background: rgba(16, 185, 129, 0.16);
-      border: 1.5px solid #34d399;
+      border: 1.5px solid rgb(52, 211, 153);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow:
-        0 0 16px rgba(16, 185, 129, 0.72),
-        inset 0 0 10px rgba(52, 211, 153, 0.35);
-      animation: emeraldGlowPulse 2.2s ease-in-out infinite;
+      box-shadow: rgba(16, 185, 129, 0.72) 0px 0px 16px, rgba(52, 211, 153, 0.35) 0px 0px 10px inset;
+      animation: 2.2s ease-in-out 0s infinite normal none running emeraldGlowPulse;
     }
 
     .chat-avatar-dot {
@@ -478,12 +426,10 @@
       width: 12px;
       height: 12px;
       border-radius: 999px;
-      background: #10b981;
-      border: 2px solid #0d1614;
-      box-shadow:
-        0 0 10px #10b981,
-        0 0 18px #34d399;
-      animation: emeraldDotPulse 1.6s ease-in-out infinite;
+      background: rgb(16, 185, 129);
+      border: 2px solid rgb(13, 22, 20);
+      box-shadow: rgb(16, 185, 129) 0px 0px 10px, rgb(52, 211, 153) 0px 0px 18px;
+      animation: 1.6s ease-in-out 0s infinite normal none running emeraldDotPulse;
     }
 
     .chat-title-row {
@@ -494,10 +440,10 @@
     }
 
     .chat-title {
-      margin: 0;
+      margin: 0px;
       font-size: 0.95rem;
       font-weight: 800;
-      color: #ffffff;
+      color: rgb(255, 255, 255);
     }
 
     @media (min-width: 640px) {
@@ -509,27 +455,24 @@
     .chat-online {
       font-size: 0.78rem;
       font-weight: 700;
-      color: #34d399;
-      text-shadow: 0 0 10px rgba(16, 185, 129, 0.75);
+      color: rgb(52, 211, 153);
+      text-shadow: rgba(16, 185, 129, 0.75) 0px 0px 10px;
     }
 
-    /* Larger, Bold, Highlighted Neon-Pink Pill Badge */
     .chat-subtitle {
       display: inline-flex;
       align-items: center;
-      margin: 6px 0 0;
+      margin: 6px 0px 0px;
       padding: 5px 13px;
       border-radius: 999px;
       font-size: 0.88rem;
       font-weight: 800;
       letter-spacing: 0.01em;
-      color: #ffffff;
+      color: rgb(255, 255, 255);
       background: linear-gradient(95deg, rgba(255, 30, 138, 0.42) 0%, rgba(255, 119, 186, 0.28) 100%);
       border: 1.5px solid rgba(255, 119, 186, 0.82);
-      box-shadow:
-        0 0 16px rgba(255, 30, 138, 0.52),
-        inset 0 1px 0 rgba(255, 255, 255, 0.32);
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+      box-shadow: rgba(255, 30, 138, 0.52) 0px 0px 16px, rgba(255, 255, 255, 0.32) 0px 1px 0px inset;
+      text-shadow: rgba(0, 0, 0, 0.75) 0px 1px 4px;
     }
 
     @media (min-width: 640px) {
@@ -547,42 +490,24 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #34d399;
+      color: rgb(52, 211, 153);
       background: rgba(16, 185, 129, 0.16);
-      border: 1.5px solid #10b981;
-      box-shadow:
-        0 0 14px rgba(16, 185, 129, 0.7),
-        inset 0 0 8px rgba(52, 211, 153, 0.3);
-      text-shadow: 0 0 8px rgba(52, 211, 153, 0.85);
-      animation: emeraldGlowPulse 2.2s ease-in-out infinite;
+      border: 1.5px solid rgb(16, 185, 129);
+      box-shadow: rgba(16, 185, 129, 0.7) 0px 0px 14px, rgba(52, 211, 153, 0.3) 0px 0px 8px inset;
+      text-shadow: rgba(52, 211, 153, 0.85) 0px 0px 8px;
+      animation: 2.2s ease-in-out 0s infinite normal none running emeraldGlowPulse;
     }
 
     @keyframes emeraldGlowPulse {
-      0%, 100% {
-        box-shadow:
-          0 0 12px rgba(16, 185, 129, 0.62),
-          inset 0 0 8px rgba(52, 211, 153, 0.25);
-      }
-      50% {
-        box-shadow:
-          0 0 22px rgba(16, 185, 129, 0.95),
-          0 0 34px rgba(52, 211, 153, 0.55),
-          inset 0 0 12px rgba(52, 211, 153, 0.45);
-      }
+      0%, 100% { box-shadow: rgba(16, 185, 129, 0.62) 0px 0px 12px, rgba(52, 211, 153, 0.25) 0px 0px 8px inset; }
+      50% { box-shadow: rgba(16, 185, 129, 0.95) 0px 0px 22px, rgba(52, 211, 153, 0.55) 0px 0px 34px, rgba(52, 211, 153, 0.45) 0px 0px 12px inset; }
     }
 
     @keyframes emeraldDotPulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 8px #10b981, 0 0 14px #34d399;
-      }
-      50% {
-        transform: scale(1.18);
-        box-shadow: 0 0 14px #10b981, 0 0 24px #34d399;
-      }
+      0%, 100% { transform: scale(1); box-shadow: rgb(16, 185, 129) 0px 0px 8px, rgb(52, 211, 153) 0px 0px 14px; }
+      50% { transform: scale(1.18); box-shadow: rgb(16, 185, 129) 0px 0px 14px, rgb(52, 211, 153) 0px 0px 24px; }
     }
 
-    /* Live Typing Indicator & Blinking Caret */
     .typing-dots {
       display: inline-flex;
       align-items: center;
@@ -594,9 +519,9 @@
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: #ff77ba;
-      box-shadow: 0 0 8px rgba(255, 30, 138, 0.75);
-      animation: typingDotBounce 1.1s ease-in-out infinite;
+      background: rgb(255, 119, 186);
+      box-shadow: rgba(255, 30, 138, 0.75) 0px 0px 8px;
+      animation: 1.1s ease-in-out 0s infinite normal none running typingDotBounce;
     }
 
     .typing-dots span:nth-child(2) {
@@ -608,14 +533,8 @@
     }
 
     @keyframes typingDotBounce {
-      0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.45;
-      }
-      30% {
-        transform: translateY(-4px);
-        opacity: 1;
-      }
+      0%, 60%, 100% { transform: translateY(0px); opacity: 0.45; }
+      30% { transform: translateY(-4px); opacity: 1; }
     }
 
     .typing-caret {
@@ -624,9 +543,9 @@
       height: 1.05em;
       margin-left: 2px;
       vertical-align: -0.15em;
-      background-color: #ff77ba;
-      box-shadow: 0 0 8px #ff1e8a;
-      animation: caretBlink 0.75s step-end infinite;
+      background-color: rgb(255, 119, 186);
+      box-shadow: rgb(255, 30, 138) 0px 0px 8px;
+      animation: 0.75s step-end 0s infinite normal none running caretBlink;
     }
 
     @keyframes caretBlink {
@@ -642,9 +561,9 @@
 
     .chips-wrap.chips-revealed {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0px);
       pointer-events: auto;
-      transition: opacity 0.35s ease, transform 0.35s ease;
+      transition: opacity 0.35s, transform 0.35s;
     }
 
     .chat-feed {
@@ -681,18 +600,18 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
-      animation: msgAppear 0.22s ease-out both;
+      animation: 0.22s ease-out 0s 1 normal both running msgAppear;
     }
 
     .msg-row-user {
       display: flex;
       justify-content: flex-end;
-      animation: msgAppear 0.22s ease-out both;
+      animation: 0.22s ease-out 0s 1 normal both running msgAppear;
     }
 
     @keyframes msgAppear {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0px); }
     }
 
     .bubble-bot {
@@ -709,14 +628,14 @@
     .bubble-user {
       max-width: 86%;
       padding: 10px 15px;
-      border-radius: 18px 18px 4px 18px;
-      background: linear-gradient(135deg, #ff1e8a 0%, #c8136d 100%);
+      border-radius: 18px 18px 4px;
+      background: linear-gradient(135deg, rgb(255, 30, 138) 0%, rgb(200, 19, 109) 100%);
       border: 1px solid rgba(255, 176, 216, 0.55);
-      color: #ffffff;
+      color: rgb(255, 255, 255);
       font-size: 0.92rem;
       font-weight: 700;
       line-height: 1.4;
-      box-shadow: 0 6px 18px rgba(255, 30, 138, 0.38);
+      box-shadow: rgba(255, 30, 138, 0.38) 0px 6px 18px;
     }
 
     .chips-wrap {
@@ -736,9 +655,9 @@
       border-radius: 12px;
       background: rgba(255, 30, 138, 0.16);
       border: 1px solid rgba(255, 119, 186, 0.48);
-      color: #ffe8f5;
+      color: rgb(255, 232, 245);
       cursor: pointer;
-      transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.15s, background-color 0.15s, border-color 0.15s;
     }
 
     @media (min-width: 640px) {
@@ -750,22 +669,22 @@
 
     .chip-btn:hover {
       background: rgba(255, 30, 138, 0.28);
-      border-color: #ff77ba;
+      border-color: rgb(255, 119, 186);
       transform: translateY(-1px);
     }
 
     .chip-btn-skip {
-      background: linear-gradient(95deg, #ff1e8a 0%, #db1274 100%);
+      background: linear-gradient(95deg, rgb(255, 30, 138) 0%, rgb(219, 18, 116) 100%);
       border: 1px solid rgba(255, 176, 216, 0.78);
-      color: #ffffff;
+      color: rgb(255, 255, 255);
       font-weight: 800;
-      box-shadow: 0 0 18px rgba(255, 30, 138, 0.58);
+      box-shadow: rgba(255, 30, 138, 0.58) 0px 0px 18px;
     }
 
     .chip-btn-skip:hover {
-      background: linear-gradient(95deg, #ff3a99 0%, #ee1880 100%);
-      border-color: #ffffff;
-      box-shadow: 0 0 24px rgba(255, 30, 138, 0.82);
+      background: linear-gradient(95deg, rgb(255, 58, 153) 0%, rgb(238, 24, 128) 100%);
+      border-color: rgb(255, 255, 255);
+      box-shadow: rgba(255, 30, 138, 0.82) 0px 0px 24px;
     }
 
     .chat-form {
@@ -784,17 +703,17 @@
     }
 
     .chat-input {
-      flex: 1;
-      min-width: 0;
+      flex: 1 1 0%;
+      min-width: 0px;
       padding: 12px 15px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 119, 186, 0.34);
-      color: #ffffff;
+      color: rgb(255, 255, 255);
       font-family: var(--font-sans);
       font-size: 0.92rem;
       outline: none;
-      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+      transition: border-color 0.16s, box-shadow 0.16s;
     }
 
     .chat-input::placeholder {
@@ -802,8 +721,8 @@
     }
 
     .chat-input:focus {
-      border-color: #ff1e8a;
-      box-shadow: 0 0 0 3px rgba(255, 30, 138, 0.28);
+      border-color: rgb(255, 30, 138);
+      box-shadow: rgba(255, 30, 138, 0.28) 0px 0px 0px 3px;
     }
 
     .chat-send-btn {
@@ -815,14 +734,14 @@
       padding: 12px 18px;
       border-radius: 12px;
       border: 1px solid rgba(255, 176, 216, 0.7);
-      background: linear-gradient(135deg, #ff1e8a 0%, #d41170 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, rgb(255, 30, 138) 0%, rgb(212, 17, 112) 100%);
+      color: rgb(255, 255, 255);
       font-family: var(--font-sans);
       font-size: 0.92rem;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 30, 138, 0.48);
-      transition: transform 0.15s ease, filter 0.15s ease;
+      box-shadow: rgba(255, 30, 138, 0.48) 0px 6px 20px;
+      transition: transform 0.15s, filter 0.15s;
     }
 
     .chat-send-btn:hover {
@@ -839,11 +758,11 @@
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 800;
-      color: #ffffff;
-      background: linear-gradient(95deg, #ff1e8a 0%, #d41170 100%);
+      color: rgb(255, 255, 255);
+      background: linear-gradient(95deg, rgb(255, 30, 138) 0%, rgb(212, 17, 112) 100%);
       border: 1px solid rgba(255, 176, 216, 0.7);
-      box-shadow: 0 6px 20px rgba(255, 30, 138, 0.48);
-      transition: transform 0.15s ease, filter 0.15s ease;
+      box-shadow: rgba(255, 30, 138, 0.48) 0px 6px 20px;
+      transition: transform 0.15s, filter 0.15s;
     }
 
     .chat-inline-cta:hover {
@@ -851,9 +770,6 @@
       transform: translateY(-1px);
     }
 
-    /* =====================================================================
-       7. BOTTOM CALLOUT BOX + FULL-WIDTH HOT-PINK CTA + RESERVATION NOTE
-       ===================================================================== */
     .bottom-section {
       position: relative;
       z-index: 20;
@@ -871,9 +787,7 @@
       padding: 16px 18px;
       background: linear-gradient(135deg, rgba(255, 30, 138, 0.18) 0%, rgba(168, 24, 92, 0.16) 55%, rgba(255, 119, 186, 0.14) 100%);
       border: 1.5px solid rgba(255, 30, 138, 0.62);
-      box-shadow:
-        0 12px 32px -10px rgba(255, 30, 138, 0.34),
-        inset 0 0 20px rgba(255, 30, 138, 0.14);
+      box-shadow: rgba(255, 30, 138, 0.34) 0px 12px 32px -10px, rgba(255, 30, 138, 0.14) 0px 0px 20px inset;
     }
 
     @media (min-width: 640px) {
@@ -884,24 +798,26 @@
     }
 
     .callout-text {
-      margin: 0;
+      margin: 0px;
       font-size: clamp(0.98rem, 2.5vw, 1.24rem);
       font-weight: 700;
       line-height: 1.45;
-      color: #ffffff;
+      color: rgb(255, 255, 255);
+      text-shadow: rgba(255, 30, 138, 0.38) 0px 0px 10px, rgba(0, 0, 0, 0.9) 0px 2px 8px;
     }
 
     .callout-pink {
-      color: #ff77ba;
+      color: rgb(255, 119, 186);
       font-weight: 800;
+      text-shadow: rgba(255, 255, 255, 0.24) 0px 0px 9px, rgba(0, 0, 0, 0.92) 0px 2px 8px;
     }
 
     .callout-pink-underline {
-      color: #ff1e8a;
+      color: rgb(255, 30, 138);
       font-weight: 900;
-      text-decoration: underline;
-      text-decoration-color: #ff1e8a;
+      text-decoration: underline rgb(255, 30, 138);
       text-underline-offset: 4px;
+      text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 9px, rgba(0, 0, 0, 0.92) 0px 2px 8px;
     }
 
     .main-cta-btn {
@@ -917,14 +833,11 @@
       font-size: clamp(1.08rem, 3vw, 1.42rem);
       font-weight: 800;
       letter-spacing: -0.01em;
-      color: #ffffff;
-      background: linear-gradient(95deg, #ff1e8a 0%, #ff47a1 50%, #d1106f 100%);
+      color: rgb(255, 255, 255);
+      background: linear-gradient(95deg, rgb(255, 30, 138) 0%, rgb(255, 71, 161) 50%, rgb(209, 16, 111) 100%);
       border: 1.5px solid rgba(255, 178, 224, 0.78);
-      box-shadow:
-        0 12px 34px -4px rgba(255, 30, 138, 0.76),
-        0 0 28px rgba(255, 30, 138, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.45);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+      box-shadow: rgba(255, 30, 138, 0.76) 0px 12px 34px -4px, rgba(255, 30, 138, 0.48) 0px 0px 28px, rgba(255, 255, 255, 0.45) 0px 1px 0px inset;
+      transition: transform 0.16s, box-shadow 0.16s, filter 0.16s;
     }
 
     @media (min-width: 640px) {
@@ -937,14 +850,11 @@
     .main-cta-btn:hover {
       filter: brightness(1.08);
       transform: translateY(-2px);
-      box-shadow:
-        0 16px 40px -2px rgba(255, 30, 138, 0.9),
-        0 0 38px rgba(255, 119, 186, 0.68),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      box-shadow: rgba(255, 30, 138, 0.9) 0px 16px 40px -2px, rgba(255, 119, 186, 0.68) 0px 0px 38px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;
     }
 
     .reservation-note {
-      margin: 0;
+      margin: 0px;
       font-size: 0.82rem;
       color: var(--text-secondary);
       display: inline-flex;
@@ -955,7 +865,7 @@
     }
 
     .reservation-check {
-      color: #ff77ba;
+      color: rgb(255, 119, 186);
       font-weight: 800;
     }
 
@@ -963,12 +873,12 @@
       position: absolute;
       width: 1px;
       height: 1px;
-      padding: 0;
+      padding: 0px;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip: rect(0px, 0px, 0px, 0px);
       white-space: nowrap;
-      border: 0;
+      border: 0px;
     }
   </style>
 </head>
@@ -982,48 +892,48 @@
         <svg viewBox="0 0 100 100" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="flyHullGrad" x1="50" y1="8" x2="50" y2="76" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFFFFF" />
-              <stop offset="58%" stop-color="#E5E7EB" />
-              <stop offset="100%" stop-color="#9CA3AF" />
+              <stop offset="0%" stop-color="#FFFFFF"></stop>
+              <stop offset="58%" stop-color="#E5E7EB"></stop>
+              <stop offset="100%" stop-color="#9CA3AF"></stop>
             </linearGradient>
             <linearGradient id="flyPinkGrad" x1="50" y1="8" x2="50" y2="78" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FF77BA" />
-              <stop offset="55%" stop-color="#FF1E8A" />
-              <stop offset="100%" stop-color="#9D174D" />
+              <stop offset="0%" stop-color="#FF77BA"></stop>
+              <stop offset="55%" stop-color="#FF1E8A"></stop>
+              <stop offset="100%" stop-color="#9D174D"></stop>
             </linearGradient>
             <linearGradient id="flyFlameGrad" x1="50" y1="74" x2="50" y2="99" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFFFFF" />
-              <stop offset="45%" stop-color="#FF77BA" />
-              <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0" />
+              <stop offset="0%" stop-color="#FFFFFF"></stop>
+              <stop offset="45%" stop-color="#FF77BA"></stop>
+              <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0"></stop>
             </linearGradient>
           </defs>
 
           <!-- Thruster Flame -->
           <g class="flight-flame">
-            <path d="M40 73 L50 98 L60 73 Z" fill="url(#flyFlameGrad)" />
-            <path d="M45 73 L50 89 L55 73 Z" fill="#FFFFFF" />
+            <path d="M40 73 L50 98 L60 73 Z" fill="url(#flyFlameGrad)"></path>
+            <path d="M45 73 L50 89 L55 73 Z" fill="#FFFFFF"></path>
           </g>
 
           <!-- Swept Side Fins -->
-          <path d="M33 54 L17 74 L35 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2" />
-          <path d="M67 54 L83 74 L65 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2" />
+          <path d="M33 54 L17 74 L35 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2"></path>
+          <path d="M67 54 L83 74 L65 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2"></path>
 
           <!-- Nozzle -->
-          <rect x="41" y="69" width="18" height="6" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2" />
+          <rect x="41" y="69" width="18" height="6" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2"></rect>
 
           <!-- Fuselage -->
-          <path d="M50 9 C34 28, 31 50, 34 69 L66 69 C69 50, 66 28, 50 9 Z" fill="url(#flyHullGrad)" stroke="#FFFFFF" stroke-width="1.4" />
+          <path d="M50 9 C34 28, 31 50, 34 69 L66 69 C69 50, 66 28, 50 9 Z" fill="url(#flyHullGrad)" stroke="#FFFFFF" stroke-width="1.4"></path>
 
           <!-- Nose Cone Accent -->
-          <path d="M50 9 C42 18, 38 27, 36 35 L64 35 C62 27, 58 18, 50 9 Z" fill="url(#flyPinkGrad)" />
+          <path d="M50 9 C42 18, 38 27, 36 35 L64 35 C62 27, 58 18, 50 9 Z" fill="url(#flyPinkGrad)"></path>
 
           <!-- Center Fin -->
-          <path d="M50 54 L47 75 L53 75 Z" fill="#FF1E8A" />
+          <path d="M50 54 L47 75 L53 75 Z" fill="#FF1E8A"></path>
 
           <!-- Cockpit Window -->
-          <circle cx="50" cy="44" r="9.5" fill="#170916" stroke="url(#flyPinkGrad)" stroke-width="3" />
-          <circle cx="50" cy="44" r="5.5" fill="#FF1E8A" fill-opacity="0.38" />
-          <circle cx="47.5" cy="41.5" r="2" fill="#FFFFFF" />
+          <circle cx="50" cy="44" r="9.5" fill="#170916" stroke="url(#flyPinkGrad)" stroke-width="3"></circle>
+          <circle cx="50" cy="44" r="5.5" fill="#FF1E8A" fill-opacity="0.38"></circle>
+          <circle cx="47.5" cy="41.5" r="2" fill="#FFFFFF"></circle>
         </svg>
       </div>
     </div>
@@ -1047,60 +957,60 @@
           <svg class="stationary-rocket-svg" viewBox="0 0 260 230" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rocket launching out of glowing magenta clouds">
             <defs>
               <linearGradient id="statHull" x1="120" y1="30" x2="188" y2="122" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FFFFFF" />
-                <stop offset="55%" stop-color="#E5E7EB" />
-                <stop offset="100%" stop-color="#9CA3AF" />
+                <stop offset="0%" stop-color="#FFFFFF"></stop>
+                <stop offset="55%" stop-color="#E5E7EB"></stop>
+                <stop offset="100%" stop-color="#9CA3AF"></stop>
               </linearGradient>
               <linearGradient id="statPink" x1="125" y1="18" x2="195" y2="140" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FF77BA" />
-                <stop offset="55%" stop-color="#FF1E8A" />
-                <stop offset="100%" stop-color="#831843" />
+                <stop offset="0%" stop-color="#FF77BA"></stop>
+                <stop offset="55%" stop-color="#FF1E8A"></stop>
+                <stop offset="100%" stop-color="#831843"></stop>
               </linearGradient>
               <linearGradient id="statPlume" x1="130" y1="115" x2="72" y2="205" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FFFFFF" />
-                <stop offset="38%" stop-color="#FFB0D8" stop-opacity="0.95" />
-                <stop offset="80%" stop-color="#FF1E8A" stop-opacity="0.6" />
-                <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0" />
+                <stop offset="0%" stop-color="#FFFFFF"></stop>
+                <stop offset="38%" stop-color="#FFB0D8" stop-opacity="0.95"></stop>
+                <stop offset="80%" stop-color="#FF1E8A" stop-opacity="0.6"></stop>
+                <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0"></stop>
               </linearGradient>
               <radialGradient id="cloudMain" cx="50%" cy="45%" r="55%">
-                <stop offset="0%" stop-color="#FFB0D8" />
-                <stop offset="52%" stop-color="#FF1E8A" />
-                <stop offset="100%" stop-color="#701A45" />
+                <stop offset="0%" stop-color="#FFB0D8"></stop>
+                <stop offset="52%" stop-color="#FF1E8A"></stop>
+                <stop offset="100%" stop-color="#701A45"></stop>
               </radialGradient>
               <radialGradient id="cloudDeep" cx="50%" cy="50%" r="55%">
-                <stop offset="0%" stop-color="#FF47A3" />
-                <stop offset="68%" stop-color="#9D174D" />
-                <stop offset="100%" stop-color="#3B0722" />
+                <stop offset="0%" stop-color="#FF47A3"></stop>
+                <stop offset="68%" stop-color="#9D174D"></stop>
+                <stop offset="100%" stop-color="#3B0722"></stop>
               </radialGradient>
             </defs>
 
             <!-- Thruster Plume -->
-            <polygon points="120,114 142,128 102,212 48,192" fill="url(#statPlume)" />
-            <polygon points="126,118 137,125 94,198 66,188" fill="#FFFFFF" fill-opacity="0.78" />
+            <polygon points="120,114 142,128 102,212 48,192" fill="url(#statPlume)"></polygon>
+            <polygon points="126,118 137,125 94,198 66,188" fill="#FFFFFF" fill-opacity="0.78"></polygon>
 
             <!-- Stationary Angled Rocket -->
             <g transform="translate(152, 76) rotate(34)">
-              <path d="M-18 15 L-35 40 L-14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2" />
-              <path d="M18 15 L35 40 L14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2" />
-              <rect x="-11" y="34" width="22" height="7" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2" />
-              <path d="M0 -44 C-17 -22, -21 4, -17 35 L17 35 C21 4, 17 -22, 0 -44 Z" fill="url(#statHull)" stroke="#FFFFFF" stroke-width="1.4" />
-              <path d="M0 -44 C-9 -33, -13 -24, -15 -15 L15 -15 C13 -24, 9 -33, 0 -44 Z" fill="url(#statPink)" />
-              <path d="M0 17 L-3.5 41 L3.5 41 Z" fill="#FF1E8A" />
-              <circle cx="0" cy="3" r="11.5" fill="#180815" stroke="url(#statPink)" stroke-width="3.2" />
-              <circle cx="0" cy="3" r="7" fill="#FF1E8A" fill-opacity="0.38" />
-              <circle cx="-3" cy="0" r="2.4" fill="#FFFFFF" />
+              <path d="M-18 15 L-35 40 L-14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2"></path>
+              <path d="M18 15 L35 40 L14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2"></path>
+              <rect x="-11" y="34" width="22" height="7" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2"></rect>
+              <path d="M0 -44 C-17 -22, -21 4, -17 35 L17 35 C21 4, 17 -22, 0 -44 Z" fill="url(#statHull)" stroke="#FFFFFF" stroke-width="1.4"></path>
+              <path d="M0 -44 C-9 -33, -13 -24, -15 -15 L15 -15 C13 -24, 9 -33, 0 -44 Z" fill="url(#statPink)"></path>
+              <path d="M0 17 L-3.5 41 L3.5 41 Z" fill="#FF1E8A"></path>
+              <circle cx="0" cy="3" r="11.5" fill="#180815" stroke="url(#statPink)" stroke-width="3.2"></circle>
+              <circle cx="0" cy="3" r="7" fill="#FF1E8A" fill-opacity="0.38"></circle>
+              <circle cx="-3" cy="0" r="2.4" fill="#FFFFFF"></circle>
             </g>
 
             <!-- Layered Glowing Magenta Smoke Clouds -->
             <g>
-              <circle cx="28" cy="172" r="24" fill="url(#cloudDeep)" opacity="0.88" />
-              <circle cx="52" cy="168" r="22" fill="url(#cloudDeep)" opacity="0.9" />
-              <circle cx="24" cy="202" r="32" fill="url(#cloudMain)" />
-              <circle cx="58" cy="196" r="30" fill="url(#cloudMain)" />
-              <circle cx="92" cy="206" r="28" fill="url(#cloudMain)" />
-              <circle cx="122" cy="214" r="22" fill="url(#cloudDeep)" />
-              <circle cx="46" cy="220" r="34" fill="#FF1E8A" opacity="0.92" />
-              <circle cx="82" cy="222" r="28" fill="#FF77BA" opacity="0.88" />
+              <circle cx="28" cy="172" r="24" fill="url(#cloudDeep)" opacity="0.88"></circle>
+              <circle cx="52" cy="168" r="22" fill="url(#cloudDeep)" opacity="0.9"></circle>
+              <circle cx="24" cy="202" r="32" fill="url(#cloudMain)"></circle>
+              <circle cx="58" cy="196" r="30" fill="url(#cloudMain)"></circle>
+              <circle cx="92" cy="206" r="28" fill="url(#cloudMain)"></circle>
+              <circle cx="122" cy="214" r="22" fill="url(#cloudDeep)"></circle>
+              <circle cx="46" cy="220" r="34" fill="#FF1E8A" opacity="0.92"></circle>
+              <circle cx="82" cy="222" r="28" fill="#FF77BA" opacity="0.88"></circle>
             </g>
           </svg>
         </div>
@@ -1135,7 +1045,7 @@
           <div class="chat-header-left">
             <div class="chat-avatar" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#34D399">
-                <path d="M13 2L4.09 12.97A1 1 0 004.86 14.5H11l-1 7.5 8.91-10.97a1 1 0 00-.77-1.53H13V2z" />
+                <path d="M13 2L4.09 12.97A1 1 0 004.86 14.5H11l-1 7.5 8.91-10.97a1 1 0 00-.77-1.53H13V2z"></path>
               </svg>
               <span class="chat-avatar-dot"></span>
             </div>
@@ -1154,9 +1064,7 @@
 
         <div id="chatFeed" class="chat-feed" aria-live="polite">
           <div class="msg-row-bot">
-            <div id="openingBotBubble" class="bubble-bot">
-              <span class="typing-dots" aria-label="Typing"><span></span><span></span><span></span></span>
-            </div>
+            <div id="openingBotBubble" class="bubble-bot"></div>
 
             <div id="quickChips" class="chips-wrap chips-hidden">
               <button type="button" data-topic="product" class="chip-btn">
@@ -1174,13 +1082,7 @@
 
         <form id="chatForm" class="chat-form">
           <label for="chatInput" class="sr-only">Ask a quick question</label>
-          <input
-            id="chatInput"
-            type="text"
-            autocomplete="off"
-            placeholder="Ask a quick question..."
-            class="chat-input"
-          />
+          <input id="chatInput" type="text" autocomplete="off" placeholder="Ask a quick question..." class="chat-input">
           <button type="submit" class="chat-send-btn">
             <span>Send</span>
             <span aria-hidden="true">→</span>
@@ -1198,12 +1100,7 @@
         </p>
       </div>
 
-      <a
-        href="https://zilara.com/freeaccount.asp?sponsorsite=2075339"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="main-cta-btn"
-      >
+      <a href="https://zilara.com/freeaccount.asp?sponsorsite=2075339" target="_blank" rel="noopener noreferrer" class="main-cta-btn">
         <span>Continue to Team Overview</span>
         <span aria-hidden="true">→</span>
       </a>
@@ -1218,458 +1115,252 @@
 
   <script>
     (function () {
-      var SPONSOR_URL = 'https://zilara.com/freeaccount.asp?sponsorsite=2075339';
+      const AFFILIATE_URL = "https://zilara.com/freeaccount.asp?sponsorsite=2075339";
 
-      var pageShell = document.getElementById('pageShell');
-      var flightLayer = document.getElementById('rocketFlightLayer');
-      var flyingRocket = document.getElementById('flyingRocket');
-      var heroHeader = document.getElementById('heroHeader');
-      var promoBanner = document.getElementById('promoBanner');
-      var realtimeWord = document.getElementById('realtimeWord');
-      var chatSection = document.getElementById('chatSection');
-      var chatFeed = document.getElementById('chatFeed');
-      var chatForm = document.getElementById('chatForm');
-      var chatInput = document.getElementById('chatInput');
-      var openingBotBubble = document.getElementById('openingBotBubble');
-      var quickChips = document.getElementById('quickChips');
+      const pageShell = document.getElementById("pageShell");
+      const rocketFlightLayer = document.getElementById("rocketFlightLayer");
+      const flyingRocket = document.getElementById("flyingRocket");
+      const realtimeWord = document.getElementById("realtimeWord");
+      const chatSection = document.getElementById("chatSection");
+      const openingBotBubble = document.getElementById("openingBotBubble");
+      const quickChips = document.getElementById("quickChips");
+      const chatFeed = document.getElementById("chatFeed");
+      const chatForm = document.getElementById("chatForm");
+      const chatInput = document.getElementById("chatInput");
 
-      /* ===================================================================
-         OPENING BOT MESSAGE LIVE TYPING EFFECT
-         =================================================================== */
-      var OPENING_TEXT = 'Hey! 👋 Quick question — want to see how early FREE positioning works before spots fill up?';
-      var OPENING_FINAL_HTML = 'Hey! 👋 Quick question — want to see how early <strong style="color:#ffffff;font-weight:800;">FREE</strong> positioning works before spots fill up?';
-      var typingDone = false;
-      var typingTimer = null;
+      let chatInteracted = false;
+      let isHoveringChat = false;
+      let isTurbo = false;
 
-      function finishOpeningTyping() {
-        if (typingDone) return;
-        typingDone = true;
-        if (typingTimer) clearTimeout(typingTimer);
-        if (openingBotBubble) {
-          openingBotBubble.innerHTML = OPENING_FINAL_HTML;
-        }
-        if (quickChips) {
-          quickChips.classList.remove('chips-hidden');
-          quickChips.classList.add('chips-revealed');
-        }
-      }
-
-      (function runOpeningTyping() {
-        if (!openingBotBubble) return;
-        var chars = Array.from(OPENING_TEXT);
-        var idx = 0;
-
-        // Brief 3-dot typing indicator before characters appear
-        typingTimer = setTimeout(function stepChar() {
-          if (typingDone) return;
-          if (idx <= chars.length) {
-            var slice = chars.slice(0, idx).join('');
-            openingBotBubble.textContent = slice;
-            var caret = document.createElement('span');
-            caret.className = 'typing-caret';
-            caret.setAttribute('aria-hidden', 'true');
-            openingBotBubble.appendChild(caret);
-            idx++;
-            var ch = chars[idx - 1] || '';
-            var delay = (ch === '—' || ch === '!') ? 75 : 22;
-            typingTimer = setTimeout(stepChar, delay);
-          } else {
-            finishOpeningTyping();
-          }
-        }, 520);
-      })();
-
-      /* Stop REALTIME flash/enlarge loop as soon as user interacts with chat card */
       function stopRealtimeFlash() {
-        if (realtimeWord && realtimeWord.classList.contains('is-flashing')) {
-          realtimeWord.classList.remove('is-flashing');
+        if (!chatInteracted) {
+          chatInteracted = true;
+          realtimeWord.classList.remove("is-flashing");
         }
       }
 
-      if (chatSection) {
-        chatSection.addEventListener('pointerenter', stopRealtimeFlash);
-        chatSection.addEventListener('pointerdown', stopRealtimeFlash);
-        chatSection.addEventListener('focusin', stopRealtimeFlash);
-      }
-      chatInput.addEventListener('focus', stopRealtimeFlash);
-      chatInput.addEventListener('input', stopRealtimeFlash);
-
-      /* ===================================================================
-         SECOND FLYING ROCKET CONTROLLER
-         - Starts at top even with headline, shoots straight up briefly
-         - Curves wide around the far left (clear of 'REALTIME' banner text)
-         - Cuts across the chat area and loops back up
-         - Hovers beside chat box when user focuses/types; turbo boosts on submit/chip
-         =================================================================== */
-      var mode = 'orbit'; // 'orbit' | 'hover' | 'turbo'
-      var orbitT = 0;
-      var turboT = 0;
-      var turboFromX = 40;
-      var turboFromY = 40;
-      var rx = 38;
-      var ry = 38;
-      var rAngle = 0;
-      var lastTime = performance.now();
-      var sparkAccum = 0;
-
-      function bezier1D(p0, p1, p2, p3, u) {
-        var inv = 1 - u;
-        return (
-          inv * inv * inv * p0 +
-          3 * inv * inv * u * p1 +
-          3 * inv * u * u * p2 +
-          u * u * u * p3
-        );
-      }
-
-      function sampleOrbitPath(t) {
-        var shellRect = pageShell.getBoundingClientRect();
-        var headRect = heroHeader.getBoundingClientRect();
-        var bannerRect = promoBanner.getBoundingClientRect();
-        var chatRect = chatSection.getBoundingClientRect();
-
-        var w = Math.max(300, shellRect.width);
-        var isMobile = w < 640;
-
-        var startX = isMobile ? 22 : 32;
-        var startY = headRect.top - shellRect.top + headRect.height * 0.45;
-        var upPeakY = Math.max(8, startY - (isMobile ? 28 : 38));
-
-        var leftMarginX = isMobile ? 6 : 8;
-        var midBannerY = bannerRect.top - shellRect.top + bannerRect.height * 0.52;
-
-        var chatEnterX = isMobile ? 16 : 24;
-        var chatCutY = chatRect.top - shellRect.top + chatRect.height * 0.42;
-        var chatExitX = w - (isMobile ? 20 : 34);
-        var chatExitY = chatRect.top - shellRect.top + chatRect.height * 0.62;
-
-        if (t < 0.16) {
-          var u1 = t / 0.16;
-          return {
-            x: startX,
-            y: startY + (upPeakY - startY) * (1 - Math.pow(1 - u1, 1.5))
-          };
-        } else if (t < 0.48) {
-          var u2 = (t - 0.16) / 0.32;
-          return {
-            x: bezier1D(startX, leftMarginX, leftMarginX, chatEnterX, u2),
-            y: bezier1D(upPeakY, upPeakY + 8, midBannerY, chatCutY, u2)
-          };
-        } else if (t < 0.76) {
-          var u3 = (t - 0.48) / 0.28;
-          return {
-            x: bezier1D(chatEnterX, w * 0.35, w * 0.72, chatExitX, u3),
-            y: bezier1D(chatCutY, chatCutY - 10, chatExitY + 12, chatExitY, u3)
-          };
-        } else {
-          var u4 = (t - 0.76) / 0.24;
-          return {
-            x: bezier1D(chatExitX, w * 0.42, leftMarginX, startX, u4),
-            y: bezier1D(chatExitY, chatRect.top - shellRect.top - 10, midBannerY - 20, startY, u4)
-          };
-        }
-      }
-
-      function sampleHoverPoint() {
-        var shellRect = pageShell.getBoundingClientRect();
-        var chatRect = chatSection.getBoundingClientRect();
-        var isMobile = shellRect.width < 640;
-        return {
-          x: isMobile ? 20 : 28,
-          y: chatRect.top - shellRect.top + 54
-        };
-      }
-
-      function emitSpark(x, y, headingDeg, turbo) {
-        if (!flightLayer) return;
-        var rad = ((headingDeg + 180) * Math.PI) / 180;
-        var tailDist = window.innerWidth < 640 ? 34 : 44;
-        var px = x + Math.cos(rad) * tailDist;
-        var py = y + Math.sin(rad) * tailDist;
-
-        var dot = document.createElement('span');
-        dot.className = 'exhaust-spark';
-        var size = turbo ? (Math.random() * 8 + 5) : (Math.random() * 5 + 3);
-        var palette = ['#ff1e8a', '#ff77ba', '#ffb0d8', '#ffffff'];
-        var color = palette[Math.floor(Math.random() * palette.length)];
-
-        var spread = (Math.random() - 0.5) * 26;
-        var dx = Math.cos(rad) * (turbo ? 36 : 18) + spread;
-        var dy = Math.sin(rad) * (turbo ? 36 : 18) + spread;
-
-        dot.style.width = size + 'px';
-        dot.style.height = size + 'px';
-        dot.style.left = px + 'px';
-        dot.style.top = py + 'px';
-        dot.style.background = color;
-        dot.style.boxShadow = '0 0 ' + (turbo ? 14 : 8) + 'px ' + color;
-        dot.style.setProperty('--dx', dx.toFixed(1) + 'px');
-        dot.style.setProperty('--dy', dy.toFixed(1) + 'px');
-
-        flightLayer.appendChild(dot);
-        setTimeout(function () {
-          if (dot.parentNode) dot.parentNode.removeChild(dot);
-        }, 620);
-      }
-
-      function pauseRocketBesideChat() {
-        if (mode === 'turbo') return;
-        mode = 'hover';
-        flyingRocket.classList.remove('is-turbo');
-        flyingRocket.classList.add('is-hovering');
-      }
-
-      function resumeRocketOrbit() {
-        if (mode === 'turbo') return;
-        mode = 'orbit';
-        flyingRocket.classList.remove('is-hovering');
-      }
-
-      function triggerTurboBurst() {
-        mode = 'turbo';
-        turboT = 0;
-        turboFromX = rx;
-        turboFromY = ry;
-        flyingRocket.classList.remove('is-hovering');
-        flyingRocket.classList.add('is-turbo');
-
-        for (var i = 0; i < 12; i++) {
-          emitSpark(rx, ry, rAngle + (Math.random() - 0.5) * 36, true);
-        }
-      }
-
-      function stepRocket(now) {
-        var dt = Math.min(0.05, (now - lastTime) / 1000);
-        lastTime = now;
-
-        var tx = rx;
-        var ty = ry;
-
-        if (mode === 'orbit') {
-          orbitT = (orbitT + dt / 5.4) % 1;
-          var pt = sampleOrbitPath(orbitT);
-          tx = pt.x;
-          ty = pt.y;
-
-          var dx = tx - rx;
-          var dy = ty - ry;
-          if (Math.hypot(dx, dy) > 0.2) {
-            rAngle = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
-          }
-          rx += dx * Math.min(1, dt * 14);
-          ry += dy * Math.min(1, dt * 14);
-
-          sparkAccum += dt;
-          if (sparkAccum >= 0.06) {
-            sparkAccum = 0;
-            emitSpark(rx, ry, rAngle, false);
-          }
-        } else if (mode === 'hover') {
-          var hp = sampleHoverPoint();
-          tx = hp.x;
-          ty = hp.y + Math.sin(now / 260) * 4;
-          rx += (tx - rx) * Math.min(1, dt * 6);
-          ry += (ty - ry) * Math.min(1, dt * 6);
-          rAngle += (0 - rAngle) * Math.min(1, dt * 7);
-        } else if (mode === 'turbo') {
-          turboT += dt / 0.8;
-          var u = Math.min(1, turboT);
-          var ease = 1 - Math.pow(1 - u, 2.5);
-          var topPt = sampleOrbitPath(0.16);
-          var leftLane = pageShell.getBoundingClientRect().width < 640 ? 18 : 28;
-
-          tx = bezier1D(turboFromX, leftLane, leftLane, topPt.x, ease);
-          ty = bezier1D(turboFromY, turboFromY - 75, topPt.y + 35, topPt.y, ease);
-
-          var tdx = tx - rx;
-          var tdy = ty - ry;
-          if (Math.hypot(tdx, tdy) > 0.2) {
-            rAngle = (Math.atan2(tdy, tdx) * 180) / Math.PI + 90;
-          }
-          rx = tx;
-          ry = ty;
-
-          sparkAccum += dt;
-          if (sparkAccum >= 0.025) {
-            sparkAccum = 0;
-            emitSpark(rx, ry, rAngle, true);
-          }
-
-          if (u >= 1) {
-            orbitT = 0.16;
-            mode = 'orbit';
-            flyingRocket.classList.remove('is-turbo');
-          }
-        }
-
-        flyingRocket.style.transform =
-          'translate3d(' + rx.toFixed(1) + 'px, ' + ry.toFixed(1) + 'px, 0) rotate(' + rAngle.toFixed(1) + 'deg)';
-        requestAnimationFrame(stepRocket);
-      }
-
-      var initPt = sampleOrbitPath(0);
-      rx = initPt.x;
-      ry = initPt.y;
-      flyingRocket.style.transform = 'translate3d(' + rx.toFixed(1) + 'px, ' + ry.toFixed(1) + 'px, 0) rotate(0deg)';
-      requestAnimationFrame(stepRocket);
-
-      chatInput.addEventListener('focus', pauseRocketBesideChat);
-      chatInput.addEventListener('input', function () {
-        if (chatInput.value.trim().length > 0) {
-          pauseRocketBesideChat();
-        }
-      });
-      chatInput.addEventListener('blur', function () {
-        if (chatInput.value.trim().length === 0) {
-          resumeRocketOrbit();
-        }
+      ["mouseenter", "touchstart", "click", "focusin"].forEach((evt) => {
+        chatSection.addEventListener(evt, stopRealtimeFlash, { passive: true });
       });
 
-      /* ===================================================================
-         INTERACTIVE CHAT LOGIC
-         =================================================================== */
-      var RESPONSES = {
-        product: {
-          user: "🚀 What's the product line?",
-          html: "We’re partnering with proven business leaders on a <strong style='color:#ffffff;font-weight:800;'>clean, unique product line</strong> during an early team Pre-Launch wave — and locking in your spot is <strong style='color:#ff77ba;font-weight:800;'>100% FREE</strong>.",
-          chips: [
-            { topic: 'positioning', label: '👀 How does FREE positioning work?' },
-            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
-          ]
-        },
-        positioning: {
-          user: '👀 How does FREE positioning work?',
-          html: "Getting in early is key! 👀 You reserve your <strong style='color:#ff77ba;font-weight:800;'>FREE pre-launch position</strong> at zero cost so you can see the full Team Overview right away.",
-          chips: [
-            { topic: 'product', label: "🚀 What's the product line?" },
-            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
-          ]
-        },
-        skip: {
-          user: '⚡ Skip chat — give me the link!',
-          html: "Right this way! ⚡ Click below to open the <strong style='color:#ff77ba;font-weight:800;'>Team Overview</strong> and claim your free pre-launch spot:",
-          chips: []
-        }
-      };
+      chatInput.addEventListener("focus", () => {
+        isHoveringChat = true;
+        flyingRocket.classList.add("is-hovering");
+        stopRealtimeFlash();
+      });
 
-      function scrollChatDown() {
-        requestAnimationFrame(function () {
-          chatFeed.scrollTop = chatFeed.scrollHeight;
-        });
-      }
+      chatInput.addEventListener("blur", () => {
+        isHoveringChat = false;
+        flyingRocket.classList.remove("is-hovering");
+      });
 
-      function removeInitialChips() {
-        finishOpeningTyping();
-        var chipsEl = document.getElementById('quickChips');
-        if (chipsEl && chipsEl.parentNode) {
-          chipsEl.parentNode.removeChild(chipsEl);
-        }
+      // Opening Typewriter
+      function startOpeningTypewriter() {
+        openingBotBubble.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
+        const segments = [
+          { text: "Hey! 👋 Quick question — want to see how early ", bold: false },
+          { text: "FREE", bold: true },
+          { text: " positioning works before spots fill up?", bold: false }
+        ];
+
+        setTimeout(() => {
+          openingBotBubble.innerHTML = "";
+          const textWrap = document.createElement("span");
+          const caret = document.createElement("span");
+          caret.className = "typing-caret";
+          openingBotBubble.appendChild(textWrap);
+          openingBotBubble.appendChild(caret);
+
+          let segIdx = 0;
+          let charIdx = 0;
+          let currentNode = null;
+
+          function step() {
+            if (segIdx >= segments.length) {
+              caret.remove();
+              quickChips.classList.remove("chips-hidden");
+              quickChips.classList.add("chips-revealed");
+              return;
+            }
+            const seg = segments[segIdx];
+            if (!currentNode) {
+              if (seg.bold) {
+                currentNode = document.createElement("strong");
+                currentNode.style.color = "#ffffff";
+                currentNode.style.fontWeight = "800";
+              } else {
+                currentNode = document.createElement("span");
+              }
+              textWrap.appendChild(currentNode);
+            }
+            currentNode.textContent += seg.text.charAt(charIdx);
+            charIdx++;
+            if (charIdx >= seg.text.length) {
+              segIdx++;
+              charIdx = 0;
+              currentNode = null;
+            }
+            setTimeout(step, 22);
+          }
+
+          step();
+        }, 650);
       }
 
       function addUserBubble(text) {
-        var row = document.createElement('div');
-        row.className = 'msg-row-user';
-        var bubble = document.createElement('div');
-        bubble.className = 'bubble-user';
+        const row = document.createElement("div");
+        row.className = "msg-row-user";
+        const bubble = document.createElement("div");
+        bubble.className = "bubble-user";
         bubble.textContent = text;
         row.appendChild(bubble);
         chatFeed.appendChild(row);
-        scrollChatDown();
+        chatFeed.scrollTop = chatFeed.scrollHeight;
       }
 
-      function addBotBubble(html, chips) {
-        var row = document.createElement('div');
-        row.className = 'msg-row-bot';
-
-        var bubble = document.createElement('div');
-        bubble.className = 'bubble-bot';
-        bubble.innerHTML = html;
+      function addBotBubble(text, showLink) {
+        const row = document.createElement("div");
+        row.className = "msg-row-bot";
+        const bubble = document.createElement("div");
+        bubble.className = "bubble-bot";
+        bubble.textContent = text;
         row.appendChild(bubble);
 
-        var linkBtn = document.createElement('a');
-        linkBtn.href = SPONSOR_URL;
-        linkBtn.target = '_blank';
-        linkBtn.rel = 'noopener noreferrer';
-        linkBtn.className = 'chat-inline-cta';
-        linkBtn.textContent = '👉 Continue to Team Overview →';
-        row.appendChild(linkBtn);
-
-        if (chips && chips.length > 0) {
-          var wrap = document.createElement('div');
-          wrap.className = 'chips-wrap';
-          chips.forEach(function (c) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = c.topic === 'skip' ? 'chip-btn chip-btn-skip' : 'chip-btn';
-            btn.textContent = c.label;
-            btn.addEventListener('click', function () {
-              handleTopicClick(c.topic);
-            });
-            wrap.appendChild(btn);
-          });
-          row.appendChild(wrap);
+        if (showLink) {
+          const cta = document.createElement("a");
+          cta.href = AFFILIATE_URL;
+          cta.target = "_blank";
+          cta.rel = "noopener noreferrer";
+          cta.className = "chat-inline-cta";
+          cta.textContent = "Lock In Your FREE Spot Now →";
+          row.appendChild(cta);
         }
 
         chatFeed.appendChild(row);
-        scrollChatDown();
+        chatFeed.scrollTop = chatFeed.scrollHeight;
       }
 
-      function handleTopicClick(topic) {
-        var entry = RESPONSES[topic];
-        if (!entry) return;
-        removeInitialChips();
-        triggerTurboBurst();
-        addUserBubble(entry.user);
-
-        setTimeout(function () {
-          addBotBubble(entry.html, entry.chips);
-          if (topic === 'skip') {
-            window.open(SPONSOR_URL, '_blank', 'noopener,noreferrer');
-          }
-        }, 180);
+      function triggerTurbo() {
+        isTurbo = true;
+        flyingRocket.classList.add("is-turbo");
+        setTimeout(() => {
+          isTurbo = false;
+          flyingRocket.classList.remove("is-turbo");
+        }, 1200);
       }
 
-      function answerCustomQuestion(q) {
-        var lower = q.toLowerCase();
-        if (lower.indexOf('product') !== -1 || lower.indexOf('line') !== -1) {
-          return RESPONSES.product;
+      function getReplyForTopicOrText(input) {
+        const q = input.toLowerCase();
+        if (q.includes("product") || q.includes("line") || q.includes("sell")) {
+          return "Zilara is rolling out high-demand wellness, daily vitality, and digital lifestyle products built for fast repeat orders—and you can lock in your team spot 100% FREE before launch.";
         }
-        if (lower.indexOf('free') !== -1 || lower.indexOf('cost') !== -1 || lower.indexOf('position') !== -1 || lower.indexOf('spot') !== -1) {
-          return RESPONSES.positioning;
+        if (q.includes("free") || q.includes("position") || q.includes("work") || q.includes("cost")) {
+          return "You reserve your spot in the team structure for $0 today. Everyone placed after you lands underneath your position, and commissions pay out in REALTIME.";
         }
-        return {
-          html: "It’s <strong style='color:#ff77ba;font-weight:800;'>FREE</strong> to get positioned early in our team Pre-Launch! Tap below to check out the full Team Overview:",
-          chips: [
-            { topic: 'product', label: "🚀 What's the product line?" },
-            { topic: 'positioning', label: '👀 How does FREE positioning work?' },
-            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
-          ]
-        };
+        return "You can lock in your free pre-launch position right now in under 15 seconds and check out the full team overview inside.";
       }
 
-      var presetButtons = document.querySelectorAll('[data-topic]');
-      for (var i = 0; i < presetButtons.length; i++) {
-        presetButtons[i].addEventListener('click', function () {
-          handleTopicClick(this.getAttribute('data-topic'));
-        });
-      }
+      quickChips.addEventListener("click", (e) => {
+        const btn = e.target.closest(".chip-btn");
+        if (!btn) return;
+        stopRealtimeFlash();
+        const topic = btn.getAttribute("data-topic");
 
-      chatForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var text = chatInput.value.trim();
-        if (!text) return;
+        if (topic === "skip") {
+          triggerTurbo();
+          addUserBubble("⚡ Skip chat — give me the link!");
+          setTimeout(() => {
+            addBotBubble("Here is your direct team pre-launch registration link:", true);
+            window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
+          }, 300);
+          return;
+        }
 
-        removeInitialChips();
-        triggerTurboBurst();
-        addUserBubble(text);
-        chatInput.value = '';
-        chatInput.blur();
-
-        var reply = answerCustomQuestion(text);
-        setTimeout(function () {
-          addBotBubble(reply.html, reply.chips);
-        }, 200);
+        const label = btn.textContent.trim();
+        addUserBubble(label);
+        triggerTurbo();
+        setTimeout(() => {
+          addBotBubble(getReplyForTopicOrText(topic), true);
+        }, 450);
       });
+
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const val = chatInput.value.trim();
+        if (!val) return;
+        chatInput.value = "";
+        stopRealtimeFlash();
+        addUserBubble(val);
+        triggerTurbo();
+        setTimeout(() => {
+          addBotBubble(getReplyForTopicOrText(val), true);
+        }, 500);
+      });
+
+      // Flying Rocket Loop Around Page Shell + Exhaust Sparks
+      const sparkColors = ["rgb(255, 119, 186)", "rgb(255, 30, 138)", "rgb(255, 176, 216)", "rgb(255, 255, 255)"];
+      let angle = 0;
+      let lastTs = performance.now();
+      let sparkTimer = 0;
+
+      function spawnSpark(x, y, headingRad) {
+        const spark = document.createElement("span");
+        spark.className = "exhaust-spark";
+        const size = (3.4 + Math.random() * 4.2).toFixed(2);
+        const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+        const exhaustAngle = headingRad + Math.PI + (Math.random() - 0.5) * 0.9;
+        const dist = 12 + Math.random() * 22;
+        const dx = (Math.cos(exhaustAngle) * dist).toFixed(1);
+        const dy = (Math.sin(exhaustAngle) * dist).toFixed(1);
+
+        spark.style.width = size + "px";
+        spark.style.height = size + "px";
+        spark.style.left = x.toFixed(1) + "px";
+        spark.style.top = y.toFixed(1) + "px";
+        spark.style.background = color;
+        spark.style.boxShadow = `${color} 0px 0px 8px`;
+        spark.style.setProperty("--dx", dx + "px");
+        spark.style.setProperty("--dy", dy + "px");
+
+        rocketFlightLayer.appendChild(spark);
+        setTimeout(() => spark.remove(), 640);
+      }
+
+      function animateRocket(now) {
+        const dt = (now - lastTs) / 1000;
+        lastTs = now;
+
+        const w = pageShell.offsetWidth || 900;
+        const h = pageShell.offsetHeight || 720;
+
+        const angularSpeed = isHoveringChat ? 0.14 : (isTurbo ? 1.85 : 0.62);
+        angle += dt * angularSpeed;
+
+        const cx = w * 0.5 + Math.cos(angle) * (w * 0.48);
+        const cy = h * 0.42 + Math.sin(angle * 2) * (h * 0.36);
+
+        const vx = -Math.sin(angle) * (w * 0.48);
+        const vy = 2 * Math.cos(angle * 2) * (h * 0.36);
+        const headingRad = Math.atan2(vy, vx);
+        const deg = (headingRad * 180) / Math.PI + 90;
+
+        flyingRocket.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0px) rotate(${deg.toFixed(1)}deg)`;
+
+        sparkTimer += dt;
+        const sparkInterval = isTurbo ? 0.025 : 0.06;
+        if (!isHoveringChat && sparkTimer >= sparkInterval) {
+          sparkTimer = 0;
+          const tailOffset = 32;
+          const sx = cx - Math.cos(headingRad) * tailOffset;
+          const sy = cy - Math.sin(headingRad) * tailOffset;
+          spawnSpark(sx, sy, headingRad);
+        }
+
+        requestAnimationFrame(animateRocket);
+      }
+
+      startOpeningTypewriter();
+      requestAnimationFrame(animateRocket);
     })();
   </script>
 </body>
