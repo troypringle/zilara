@@ -1,461 +1,1526 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Team Pre-Launch | Lock In Your Free Position</title>
-    <!-- Load Tailwind CSS for sleek, responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter & Plus Jakarta Sans Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-glow': 'pulseGlow 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float-slow': 'floatSlow 8s ease-in-out infinite',
-                        'msg-in': 'msgIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                    },
-                    keyframes: {
-                        pulseGlow: {
-                            '0%, 100%': { 
-                                boxShadow: '0 0 22px rgba(16, 185, 129, 0.45), 0 0 45px rgba(6, 182, 212, 0.18)',
-                                transform: 'scale(1)'
-                            },
-                            '50%': { 
-                                boxShadow: '0 0 34px rgba(16, 185, 129, 0.78), 0 0 65px rgba(6, 182, 212, 0.35)',
-                                transform: 'scale(1.015)'
-                            },
-                        },
-                        floatSlow: {
-                            '0%, 100%': { transform: 'translateY(0px) translateX(0px)' },
-                            '50%': { transform: 'translateY(-14px) translateX(6px)' },
-                        },
-                        msgIn: {
-                            '0%': { opacity: '0', transform: 'translateY(8px) scale(0.98)' },
-                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exclusive Team Pre-Launch | Lock In Your Free Position</title>
+  <style>
+    /* =====================================================================
+       1. DESIGN TOKENS & BASE RESET (SELF-CONTAINED, ZERO EXTERNAL DEPS)
+       ===================================================================== */
+    :root {
+      --bg-black: #000000;
+      --pink-hot: #ff1e8a;
+      --pink-bright: #ff4fa3;
+      --pink-rose: #ff77ba;
+      --pink-soft: #ffb0d8;
+      --text-primary: #ffffff;
+      --text-secondary: #e8e1ef;
+      --text-muted: #b8acc5;
+      --border-pink: rgba(255, 30, 138, 0.62);
+      --border-subtle: rgba(255, 255, 255, 0.14);
+      --font-condensed: 'Impact', 'Arial Narrow', 'Haettenschweiler', 'Franklin Gothic Bold', sans-serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    <style>
-        /* Deep dark background & subtle ambient grid matching live splash aesthetic */
-        body {
-            background-color: #050811;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.14) 0%, transparent 52%),
-                radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 15% 75%, rgba(6, 182, 212, 0.10) 0%, transparent 45%);
-        }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-        .bg-grid-subtle {
-            background-size: 36px 36px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-        }
+    html {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: #000000;
+    }
 
-        /* Custom sleek scrollbar for chat messages */
-        #chat-messages::-webkit-scrollbar {
-            width: 5px;
-        }
-        #chat-messages::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.4);
-        }
-        #chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(51, 65, 85, 0.8);
-            border-radius: 9999px;
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      opacity: 1 !important;
+      visibility: visible !important;
+      font-family: var(--font-sans);
+      background-color: #000000;
+      color: var(--text-primary);
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Bouncing typing indicator dots */
-        .typing-dot {
-            animation: typingBounce 1.2s infinite ease-in-out both;
-        }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        .typing-dot:nth-child(3) { animation-delay: 0s; }
+    /* =====================================================================
+       2. MAIN RESPONSIVE CONTAINER (DESKTOP MAX-WIDTH 900PX + MOBILE)
+       ===================================================================== */
+    .page-shell {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 1;
+    }
 
-        @keyframes typingBounce {
-            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-            40% { transform: scale(1); opacity: 1; }
-        }
+    @media (min-width: 640px) {
+      .page-shell {
+        padding: 32px 24px 68px;
+        gap: 24px;
+      }
+    }
 
-        /* Extra spotlight ring when chat routes user to main CTA button */
-        .cta-spotlight {
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35), 0 0 45px rgba(16, 185, 129, 0.85) !important;
-        }
-    </style>
+    /* =====================================================================
+       3. TOP CONDENSED TWO-LINE HEADLINE + EXPAND->SHRINK ENTRANCE
+       ===================================================================== */
+    .hero-header {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      text-align: left;
+      padding: 6px 0 2px 38px;
+    }
+
+    @media (min-width: 640px) {
+      .hero-header {
+        padding: 8px 0 4px 56px;
+      }
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: var(--font-condensed);
+      font-size: clamp(2rem, 6.2vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      transform-origin: left center;
+      opacity: 1;
+      transform: scale(1);
+      animation: headlineExpandShrink 1.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-title-line {
+      display: block;
+    }
+
+    .hero-title-pink {
+      color: #ff1e8a;
+      text-shadow:
+        0 0 18px rgba(255, 30, 138, 0.78),
+        0 0 38px rgba(255, 30, 138, 0.45);
+    }
+
+    .hero-emoji {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-style: normal;
+      vertical-align: -0.04em;
+    }
+
+    @keyframes headlineExpandShrink {
+      0% {
+        opacity: 1;
+        transform: scale(0.9);
+      }
+      44% {
+        opacity: 1;
+        transform: scale(1.16);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* =====================================================================
+       4. PROMOTIONAL BANNER CARD (OBSIDIAN/PLUM/TEAL + STATIONARY ROCKET)
+       ===================================================================== */
+    .promo-banner {
+      position: relative;
+      z-index: 15;
+      width: 100%;
+      border-radius: 22px;
+      padding: 20px 18px;
+      background-color: #0b0914;
+      background-image:
+        radial-gradient(circle at 22% 82%, rgba(255, 30, 138, 0.36) 0%, transparent 56%),
+        radial-gradient(circle at 86% 24%, rgba(14, 116, 144, 0.28) 0%, transparent 54%),
+        linear-gradient(135deg, #1e0719 0%, #0b0813 52%, #071b24 100%);
+      border: 2px solid #ff1e8a;
+      box-shadow:
+        0 0 30px rgba(255, 30, 138, 0.48),
+        0 22px 54px -14px rgba(0, 0, 0, 0.95),
+        inset 0 0 30px rgba(255, 30, 138, 0.2);
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .promo-banner {
+        border-radius: 26px;
+        padding: 28px 32px;
+      }
+    }
+
+    .promo-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(115px, 42%) 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    @media (min-width: 640px) {
+      .promo-grid {
+        grid-template-columns: minmax(190px, 40%) 1fr;
+        gap: 28px;
+      }
+    }
+
+    .stationary-rocket-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 156px;
+    }
+
+    @media (min-width: 640px) {
+      .stationary-rocket-wrap {
+        min-height: 215px;
+      }
+    }
+
+    .stationary-rocket-svg {
+      width: 100%;
+      max-width: 245px;
+      height: auto;
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 0 18px rgba(255, 30, 138, 0.5));
+    }
+
+    .kinetic-stack {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      font-style: italic;
+      font-weight: 900;
+      line-height: 0.94;
+      letter-spacing: -0.025em;
+      user-select: none;
+    }
+
+    .kinetic-earn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kinetic-earn {
+      font-size: clamp(1.35rem, 4.2vw, 2.55rem);
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+    }
+
+    .kinetic-streaks {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .streak-bar {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255, 30, 138, 0.08) 0%, rgba(255, 30, 138, 0.92) 65%, rgba(255, 176, 216, 1) 100%);
+      box-shadow: 0 0 10px rgba(255, 30, 138, 0.72);
+    }
+
+    .streak-bar:nth-child(2) {
+      width: 82%;
+      margin-left: auto;
+      height: 2px;
+    }
+
+    .streak-bar:nth-child(3) {
+      width: 60%;
+      margin-left: auto;
+      height: 2px;
+      opacity: 0.78;
+    }
+
+    /* REALTIME Flash + Enlarge Loop Until Chat Interaction */
+    .kinetic-realtime {
+      display: inline-block;
+      transform-origin: left center;
+      font-size: clamp(2.05rem, 7.6vw, 4.45rem);
+      color: #ff1e8a;
+      text-shadow:
+        0 0 22px rgba(255, 30, 138, 0.82),
+        0 4px 18px rgba(0, 0, 0, 0.85);
+      transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .kinetic-realtime.is-flashing {
+      animation: realtimeFlashEnlarge 1.1s ease-in-out infinite;
+    }
+
+    @keyframes realtimeFlashEnlarge {
+      0%, 100% {
+        transform: scale(1);
+        color: #ff1e8a;
+        text-shadow:
+          0 0 22px rgba(255, 30, 138, 0.82),
+          0 4px 18px rgba(0, 0, 0, 0.85);
+      }
+      50% {
+        transform: scale(1.1);
+        color: #ffffff;
+        text-shadow:
+          0 0 14px #ffffff,
+          0 0 34px rgba(255, 30, 138, 1),
+          0 0 58px rgba(255, 119, 186, 0.98);
+      }
+    }
+
+    .kinetic-commissions {
+      font-size: clamp(1.3rem, 4.3vw, 2.65rem);
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+    }
+
+    .kinetic-free-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      margin-top: 2px;
+    }
+
+    .kinetic-free {
+      font-size: clamp(1.85rem, 6.8vw, 3.9rem);
+      color: #ff1e8a;
+      text-shadow:
+        0 0 22px rgba(255, 30, 138, 0.82),
+        0 4px 16px rgba(0, 0, 0, 0.85);
+    }
+
+    .kinetic-to-start {
+      font-size: clamp(1.2rem, 3.8vw, 2.3rem);
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+    }
+
+    /* =====================================================================
+       5. SECOND INTERACTIVE FLYING ROCKET OVERLAY
+       ===================================================================== */
+    #rocketFlightLayer {
+      position: absolute;
+      inset: 0;
+      z-index: 35;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    #flyingRocket {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 76px;
+      height: 76px;
+      margin-left: -38px;
+      margin-top: -38px;
+      will-change: transform;
+      filter:
+        drop-shadow(0 0 14px rgba(255, 30, 138, 0.88))
+        drop-shadow(0 0 24px rgba(255, 119, 186, 0.5));
+      transition: filter 0.2s ease;
+    }
+
+    @media (min-width: 640px) {
+      #flyingRocket {
+        width: 96px;
+        height: 96px;
+        margin-left: -48px;
+        margin-top: -48px;
+      }
+    }
+
+    #flyingRocket.is-hovering {
+      filter:
+        drop-shadow(0 0 18px rgba(255, 30, 138, 0.98))
+        drop-shadow(0 0 32px rgba(255, 119, 186, 0.7));
+    }
+
+    #flyingRocket.is-turbo {
+      filter:
+        drop-shadow(0 0 26px rgba(255, 30, 138, 1))
+        drop-shadow(0 0 46px rgba(255, 176, 216, 0.98));
+    }
+
+    .flight-flame {
+      transform-origin: 50% 0%;
+      animation: flightFlamePulse 0.16s ease-in-out infinite;
+    }
+
+    #flyingRocket.is-hovering .flight-flame {
+      transform: scaleY(0.6);
+      opacity: 0.72;
+    }
+
+    #flyingRocket.is-turbo .flight-flame {
+      transform: scaleY(1.75);
+      opacity: 1;
+    }
+
+    @keyframes flightFlamePulse {
+      0%, 100% { transform: scaleY(0.95) scaleX(0.96); }
+      50% { transform: scaleY(1.24) scaleX(1.06); }
+    }
+
+    .exhaust-spark {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: sparkFade 0.62s ease-out forwards;
+    }
+
+    @keyframes sparkFade {
+      0% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 14px))) scale(0.15);
+      }
+    }
+
+    /* =====================================================================
+       6. INTERACTIVE CHAT CARD ("TEAM PRE-LAUNCH LIVE GUIDE", ALL-PINK)
+       ===================================================================== */
+    .chat-section {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+    }
+
+    .chat-panel {
+      width: 100%;
+      border-radius: 22px;
+      background: linear-gradient(165deg, rgba(22, 13, 32, 0.96) 0%, rgba(11, 8, 18, 0.98) 100%);
+      border: 1.5px solid #ff1e8a;
+      box-shadow:
+        0 20px 50px -14px rgba(0, 0, 0, 0.92),
+        0 0 28px rgba(255, 30, 138, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 640px) {
+      .chat-panel {
+        border-radius: 26px;
+      }
+    }
+
+    .chat-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(90deg, rgba(255, 30, 138, 0.22) 0%, rgba(24, 14, 36, 0.95) 55%, rgba(255, 119, 186, 0.16) 100%);
+    }
+
+    @media (min-width: 640px) {
+      .chat-header {
+        padding: 16px 24px;
+      }
+    }
+
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .chat-avatar {
+      position: relative;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(255, 30, 138, 0.18);
+      border: 1.5px solid rgba(255, 119, 186, 0.68);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(255, 30, 138, 0.45);
+    }
+
+    .chat-avatar-dot {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: #ff77ba;
+      border: 2px solid #140d20;
+      box-shadow: 0 0 8px #ff1e8a;
+    }
+
+    .chat-title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chat-title {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    @media (min-width: 640px) {
+      .chat-title {
+        font-size: 1.05rem;
+      }
+    }
+
+    .chat-online {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ff77ba;
+    }
+
+    /* Larger, Bold, Highlighted Neon-Pink Pill Badge */
+    .chat-subtitle {
+      display: inline-flex;
+      align-items: center;
+      margin: 6px 0 0;
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      background: linear-gradient(95deg, rgba(255, 30, 138, 0.42) 0%, rgba(255, 119, 186, 0.28) 100%);
+      border: 1.5px solid rgba(255, 119, 186, 0.82);
+      box-shadow:
+        0 0 16px rgba(255, 30, 138, 0.52),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+    }
+
+    @media (min-width: 640px) {
+      .chat-subtitle {
+        font-size: 0.96rem;
+        padding: 5px 15px;
+      }
+    }
+
+    .live-badge {
+      flex-shrink: 0;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffb0d8;
+      background: rgba(255, 30, 138, 0.24);
+      border: 1px solid rgba(255, 119, 186, 0.65);
+      box-shadow: 0 0 14px rgba(255, 30, 138, 0.32);
+    }
+
+    .chat-feed {
+      padding: 16px 18px;
+      max-height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .chat-feed {
+        padding: 20px 24px;
+        max-height: 380px;
+      }
+    }
+
+    .chat-feed::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-feed::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .chat-feed::-webkit-scrollbar-thumb {
+      background: rgba(255, 30, 138, 0.48);
+      border-radius: 999px;
+    }
+
+    .msg-row-bot {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      animation: msgAppear 0.22s ease-out both;
+    }
+
+    .msg-row-user {
+      display: flex;
+      justify-content: flex-end;
+      animation: msgAppear 0.22s ease-out both;
+    }
+
+    @keyframes msgAppear {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bubble-bot {
+      max-width: 92%;
+      padding: 12px 16px;
+      border-radius: 18px 18px 18px 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 119, 186, 0.28);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .bubble-user {
+      max-width: 86%;
+      padding: 10px 15px;
+      border-radius: 18px 18px 4px 18px;
+      background: linear-gradient(135deg, #ff1e8a 0%, #c8136d 100%);
+      border: 1px solid rgba(255, 176, 216, 0.55);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.4;
+      box-shadow: 0 6px 18px rgba(255, 30, 138, 0.38);
+    }
+
+    .chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .chip-btn {
+      appearance: none;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 8px 13px;
+      border-radius: 12px;
+      background: rgba(255, 30, 138, 0.16);
+      border: 1px solid rgba(255, 119, 186, 0.48);
+      color: #ffe8f5;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    @media (min-width: 640px) {
+      .chip-btn {
+        font-size: 0.86rem;
+        padding: 9px 14px;
+      }
+    }
+
+    .chip-btn:hover {
+      background: rgba(255, 30, 138, 0.28);
+      border-color: #ff77ba;
+      transform: translateY(-1px);
+    }
+
+    .chip-btn-skip {
+      background: linear-gradient(95deg, #ff1e8a 0%, #db1274 100%);
+      border: 1px solid rgba(255, 176, 216, 0.78);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 0 18px rgba(255, 30, 138, 0.58);
+    }
+
+    .chip-btn-skip:hover {
+      background: linear-gradient(95deg, #ff3a99 0%, #ee1880 100%);
+      border-color: #ffffff;
+      box-shadow: 0 0 24px rgba(255, 30, 138, 0.82);
+    }
+
+    .chat-form {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(9, 7, 15, 0.94);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .chat-form {
+        padding: 14px 18px;
+      }
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 15px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 119, 186, 0.34);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .chat-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .chat-input:focus {
+      border-color: #ff1e8a;
+      box-shadow: 0 0 0 3px rgba(255, 30, 138, 0.28);
+    }
+
+    .chat-send-btn {
+      appearance: none;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 176, 216, 0.7);
+      background: linear-gradient(135deg, #ff1e8a 0%, #d41170 100%);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 30, 138, 0.48);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .chat-send-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .chat-inline-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: linear-gradient(95deg, #ff1e8a 0%, #d41170 100%);
+      border: 1px solid rgba(255, 176, 216, 0.7);
+      box-shadow: 0 6px 20px rgba(255, 30, 138, 0.48);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .chat-inline-cta:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    /* =====================================================================
+       7. BOTTOM CALLOUT BOX + FULL-WIDTH HOT-PINK CTA + RESERVATION NOTE
+       ===================================================================== */
+    .bottom-section {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .callout-card {
+      width: 100%;
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(255, 30, 138, 0.18) 0%, rgba(168, 24, 92, 0.16) 55%, rgba(255, 119, 186, 0.14) 100%);
+      border: 1.5px solid rgba(255, 30, 138, 0.62);
+      box-shadow:
+        0 12px 32px -10px rgba(255, 30, 138, 0.34),
+        inset 0 0 20px rgba(255, 30, 138, 0.14);
+    }
+
+    @media (min-width: 640px) {
+      .callout-card {
+        border-radius: 22px;
+        padding: 20px 24px;
+      }
+    }
+
+    .callout-text {
+      margin: 0;
+      font-size: clamp(0.98rem, 2.5vw, 1.24rem);
+      font-weight: 700;
+      line-height: 1.45;
+      color: #ffffff;
+    }
+
+    .callout-pink {
+      color: #ff77ba;
+      font-weight: 800;
+    }
+
+    .callout-pink-underline {
+      color: #ff1e8a;
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-color: #ff1e8a;
+      text-underline-offset: 4px;
+    }
+
+    .main-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 17px 24px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: clamp(1.08rem, 3vw, 1.42rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      background: linear-gradient(95deg, #ff1e8a 0%, #ff47a1 50%, #d1106f 100%);
+      border: 1.5px solid rgba(255, 178, 224, 0.78);
+      box-shadow:
+        0 12px 34px -4px rgba(255, 30, 138, 0.76),
+        0 0 28px rgba(255, 30, 138, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    }
+
+    @media (min-width: 640px) {
+      .main-cta-btn {
+        padding: 20px 28px;
+        border-radius: 20px;
+      }
+    }
+
+    .main-cta-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+      box-shadow:
+        0 16px 40px -2px rgba(255, 30, 138, 0.9),
+        0 0 38px rgba(255, 119, 186, 0.68),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .reservation-note {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .reservation-check {
+      color: #ff77ba;
+      font-weight: 800;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
-<body class="text-slate-100 font-sans antialiased min-h-screen flex flex-col items-center justify-center px-3.5 py-6 sm:py-10 relative overflow-x-hidden bg-grid-subtle selection:bg-emerald-400 selection:text-slate-950">
+<body>
+  <!-- Main Centered Page Shell (max-width 900px) -->
+  <main id="pageShell" class="page-shell">
 
-    <!-- Ambient Floating Glow Orbs & Subtle Particles -->
-    <div class="fixed top-[-8%] left-1/2 -translate-x-1/2 w-[92vw] max-w-[560px] h-[300px] bg-emerald-500/15 rounded-full blur-[110px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-[-6%] right-[-6%] w-[65vw] max-w-[420px] h-[260px] bg-indigo-500/15 rounded-full blur-[100px] pointer-events-none z-0 animate-float-slow"></div>
-    <div class="fixed top-[28%] left-[12%] w-2 h-2 rounded-full bg-emerald-400/40 blur-[1px] pointer-events-none animate-float-slow"></div>
-    <div class="fixed top-[62%] right-[14%] w-2.5 h-2.5 rounded-full bg-cyan-400/35 blur-[1px] pointer-events-none animate-float-slow" style="animation-delay: 2s;"></div>
-    <div class="fixed bottom-[18%] left-[22%] w-1.5 h-1.5 rounded-full bg-indigo-400/40 pointer-events-none animate-float-slow" style="animation-delay: 4s;"></div>
+    <!-- Second Interactive Flying Rocket Overlay -->
+    <div id="rocketFlightLayer" aria-hidden="true">
+      <div id="flyingRocket">
+        <svg viewBox="0 0 100 100" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="flyHullGrad" x1="50" y1="8" x2="50" y2="76" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="58%" stop-color="#E5E7EB" />
+              <stop offset="100%" stop-color="#9CA3AF" />
+            </linearGradient>
+            <linearGradient id="flyPinkGrad" x1="50" y1="8" x2="50" y2="78" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FF77BA" />
+              <stop offset="55%" stop-color="#FF1E8A" />
+              <stop offset="100%" stop-color="#9D174D" />
+            </linearGradient>
+            <linearGradient id="flyFlameGrad" x1="50" y1="74" x2="50" y2="99" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="45%" stop-color="#FF77BA" />
+              <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0" />
+            </linearGradient>
+          </defs>
 
-    <!-- Centered Glassmorphic Splash Card Container (max-width ~540px) -->
-    <main class="w-full max-w-[540px] mx-auto relative z-10">
-        <div class="bg-[#080d1a]/85 backdrop-blur-2xl border border-slate-800/90 rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.85)] overflow-hidden relative">
-            
-            <!-- Top Glowing Accent Hairline -->
-            <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-cyan-400 to-indigo-500"></div>
+          <!-- Thruster Flame -->
+          <g class="flight-flame">
+            <path d="M40 73 L50 98 L60 73 Z" fill="url(#flyFlameGrad)" />
+            <path d="M45 73 L50 89 L55 73 Z" fill="#FFFFFF" />
+          </g>
 
-            <!-- Top Offer Image Banner -->
-            <div id="offer-image-wrapper" class="w-full bg-slate-950/90 border-b border-slate-800/80 relative overflow-hidden">
-                <img 
-                    alt="Offer image" 
-                    src="https://www.herculist.com/magicbox/uploads/c1176d74c5fbbe82dbb2a566ec0a2040.jpg"
-                    class="w-full h-auto max-h-[240px] object-cover block mx-auto"
-                    onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'py-5 px-4 text-center bg-gradient-to-r from-emerald-950/70 via-slate-900 to-cyan-950/70\'><span class=\'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold tracking-wider uppercase\'>🔥 VIP TEAM PRE-LAUNCH • EARLY POSITIONING OPEN</span></div>';"
-                >
-            </div>
+          <!-- Swept Side Fins -->
+          <path d="M33 54 L17 74 L35 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2" />
+          <path d="M67 54 L83 74 L65 69 Z" fill="url(#flyPinkGrad)" stroke="#FFB0D8" stroke-width="1.2" />
 
-            <!-- Card Inner Content -->
-            <div class="p-5 sm:p-7 space-y-5">
+          <!-- Nozzle -->
+          <rect x="41" y="69" width="18" height="6" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2" />
 
-                <!-- =========================================================
-                     ATTENTION-GRABBING INTERACTIVE LEAD CHAT (TOP OF CARD)
-                ========================================================== -->
-                <section aria-label="Interactive Team Pre-Launch Chat" class="rounded-2xl bg-slate-950/90 border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.12)] overflow-hidden">
-                    
-                    <!-- Chat Header Bar -->
-                    <div class="px-4 py-2.5 bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/50 border-b border-slate-800/90 flex items-center justify-between">
-                        <div class="flex items-center space-x-2.5">
-                            <!-- Bot Avatar with Live Dot -->
-                            <div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 font-extrabold text-xs">
-                                ⚡
-                                <span class="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-slate-950"></span>
-                                </span>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-1.5">
-                                    <span class="text-xs sm:text-sm font-bold text-white tracking-tight">Team Pre-Launch Live Guide</span>
-                                    <span class="text-[11px] font-semibold text-emerald-400">• Online</span>
-                                </div>
-                                <p class="text-[11px] text-slate-400 leading-tight">Instant answers • Takes 10 seconds</p>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300">
-                            LIVE
-                        </span>
-                    </div>
+          <!-- Fuselage -->
+          <path d="M50 9 C34 28, 31 50, 34 69 L66 69 C69 50, 66 28, 50 9 Z" fill="url(#flyHullGrad)" stroke="#FFFFFF" stroke-width="1.4" />
 
-                    <!-- Chat Messages Feed -->
-                    <div id="chat-messages" class="p-3.5 sm:p-4 space-y-3 max-h-[255px] overflow-y-auto scroll-smooth">
-                        <!-- Initial Typing Indicator (Resolves in 600ms via JS) -->
-                        <div id="initial-typing" class="flex items-start space-x-2">
-                            <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-sm px-3.5 py-2.5 inline-flex items-center space-x-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Nose Cone Accent -->
+          <path d="M50 9 C42 18, 38 27, 36 35 L64 35 C62 27, 58 18, 50 9 Z" fill="url(#flyPinkGrad)" />
 
-                    <!-- Quick-Reply Chips Container -->
-                    <div id="quick-replies" class="px-3.5 pb-3 flex flex-wrap gap-1.5 hidden">
-                        <button type="button" data-topic="positioning" class="quick-chip text-left text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-200 border border-emerald-500/35 transition-all cursor-pointer active:scale-95">
-                            👀 How does FREE positioning work?
-                        </button>
-                        <button type="button" data-topic="product" class="quick-chip text-left text-xs font-semibold px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-200 border border-cyan-500/35 transition-all cursor-pointer active:scale-95">
-                            🚀 What's the product line?
-                        </button>
-                        <button type="button" data-topic="skip" class="quick-chip text-left text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all cursor-pointer active:scale-95">
-                            ⚡ Skip chat — give me the link!
-                        </button>
-                    </div>
+          <!-- Center Fin -->
+          <path d="M50 54 L47 75 L53 75 Z" fill="#FF1E8A" />
 
-                    <!-- Minimal Chat Input Bar -->
-                    <form id="chat-form" class="px-3 py-2.5 bg-slate-900/80 border-t border-slate-800/90 flex items-center gap-2">
-                        <input 
-                            type="text" 
-                            id="chat-input" 
-                            autocomplete="off"
-                            placeholder="Ask a quick question..." 
-                            class="flex-1 bg-slate-950 border border-slate-800 focus:border-emerald-400 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
-                        >
-                        <button 
-                            type="submit" 
-                            aria-label="Send message"
-                            class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm transition-all cursor-pointer active:scale-95 flex items-center gap-1 shrink-0"
-                        >
-                            <span>Send</span>
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </button>
-                    </form>
-                </section>
+          <!-- Cockpit Window -->
+          <circle cx="50" cy="44" r="9.5" fill="#170916" stroke="url(#flyPinkGrad)" stroke-width="3" />
+          <circle cx="50" cy="44" r="5.5" fill="#FF1E8A" fill-opacity="0.38" />
+          <circle cx="47.5" cy="41.5" r="2" fill="#FFFFFF" />
+        </svg>
+      </div>
+    </div>
 
-                <!-- =========================================================
-                     PRESERVED CORE SPLASH HEADLINE & COPY
-                ========================================================== -->
-                <div class="text-center space-y-3.5 pt-1">
-                    <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-                        I just found something <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">REALLY good!</span> 🤯
-                    </h1>
+    <!-- 1. Top Condensed Two-Line Uppercase Headline -->
+    <header id="heroHeader" class="hero-header">
+      <h1 class="hero-title">
+        <span class="hero-title-line">I JUST FOUND</span>
+        <span class="hero-title-line">
+          <span class="hero-title-pink">SOMETHING REALLY GOOD!</span>
+          <span class="hero-emoji" aria-hidden="true">🤯</span>
+        </span>
+      </h1>
+    </header>
 
-                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-                        I’m partnering with some incredibly successful business leaders on a clean, unique product line — and we’re doing a huge team Pre-Launch right now! <span class="text-white font-semibold">It’s always better to get in early. 👀</span>
-                    </p>
+    <!-- 2. Dark Obsidian/Plum/Teal Neon-Pink Promo Card -->
+    <section id="promoBanner" class="promo-banner" aria-label="Earn Realtime Commissions Free to Start">
+      <div class="promo-grid">
+        <!-- Left: Stationary Angled Rocket Blasting Out of Layered Magenta Smoke Clouds -->
+        <div class="stationary-rocket-wrap">
+          <svg class="stationary-rocket-svg" viewBox="0 0 260 230" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rocket launching out of glowing magenta clouds">
+            <defs>
+              <linearGradient id="statHull" x1="120" y1="30" x2="188" y2="122" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="55%" stop-color="#E5E7EB" />
+                <stop offset="100%" stop-color="#9CA3AF" />
+              </linearGradient>
+              <linearGradient id="statPink" x1="125" y1="18" x2="195" y2="140" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FF77BA" />
+                <stop offset="55%" stop-color="#FF1E8A" />
+                <stop offset="100%" stop-color="#831843" />
+              </linearGradient>
+              <linearGradient id="statPlume" x1="130" y1="115" x2="72" y2="205" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="38%" stop-color="#FFB0D8" stop-opacity="0.95" />
+                <stop offset="80%" stop-color="#FF1E8A" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#FF1E8A" stop-opacity="0" />
+              </linearGradient>
+              <radialGradient id="cloudMain" cx="50%" cy="45%" r="55%">
+                <stop offset="0%" stop-color="#FFB0D8" />
+                <stop offset="52%" stop-color="#FF1E8A" />
+                <stop offset="100%" stop-color="#701A45" />
+              </radialGradient>
+              <radialGradient id="cloudDeep" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="#FF47A3" />
+                <stop offset="68%" stop-color="#9D174D" />
+                <stop offset="100%" stop-color="#3B0722" />
+              </radialGradient>
+            </defs>
 
-                    <div class="rounded-2xl bg-slate-950/75 border border-emerald-500/25 px-4 py-3">
-                        <p class="text-sm sm:text-base font-bold text-white leading-snug">
-                            And it’s <span class="text-emerald-400 underline decoration-emerald-400/50 underline-offset-4">FREE</span> to get positioned. Yes… <span class="text-emerald-400">FREE!</span> 🙌 <span class="text-amber-300 block sm:inline mt-1 sm:mt-0">I just got started and it’s going NUTS!!!</span>
-                        </p>
-                    </div>
-                </div>
+            <!-- Thruster Plume -->
+            <polygon points="120,114 142,128 102,212 48,192" fill="url(#statPlume)" />
+            <polygon points="126,118 137,125 94,198 66,188" fill="#FFFFFF" fill-opacity="0.78" />
 
-                <!-- =========================================================
-                     PRESERVED PRIMARY CTA BUTTON & SUBTEXT
-                ========================================================== -->
-                <div class="space-y-2.5 pt-1">
-                    <a 
-                        id="primary-cta-btn"
-                        href="https://zilara.com/freeaccount.asp?sponsorsite=2075339"
-                        class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 hover:from-emerald-400 hover:to-cyan-300 text-slate-950 font-black text-base sm:text-lg tracking-wide shadow-lg animate-pulse-glow transition-all duration-200 flex items-center justify-center gap-2 text-center"
-                    >
-                        <span>Continue to Team Overview &rarr;</span>
-                    </a>
+            <!-- Stationary Angled Rocket -->
+            <g transform="translate(152, 76) rotate(34)">
+              <path d="M-18 15 L-35 40 L-14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2" />
+              <path d="M18 15 L35 40 L14 34 Z" fill="url(#statPink)" stroke="#FFB0D8" stroke-width="1.2" />
+              <rect x="-11" y="34" width="22" height="7" rx="2" fill="#2A1022" stroke="#FF77BA" stroke-width="1.2" />
+              <path d="M0 -44 C-17 -22, -21 4, -17 35 L17 35 C21 4, 17 -22, 0 -44 Z" fill="url(#statHull)" stroke="#FFFFFF" stroke-width="1.4" />
+              <path d="M0 -44 C-9 -33, -13 -24, -15 -15 L15 -15 C13 -24, 9 -33, 0 -44 Z" fill="url(#statPink)" />
+              <path d="M0 17 L-3.5 41 L3.5 41 Z" fill="#FF1E8A" />
+              <circle cx="0" cy="3" r="11.5" fill="#180815" stroke="url(#statPink)" stroke-width="3.2" />
+              <circle cx="0" cy="3" r="7" fill="#FF1E8A" fill-opacity="0.38" />
+              <circle cx="-3" cy="0" r="2.4" fill="#FFFFFF" />
+            </g>
 
-                    <p class="text-center text-xs text-emerald-300/90 font-medium">
-                        ✓ Your free pre-launch spot is reserved · Check your inbox for next steps
-                    </p>
-                </div>
-
-            </div>
+            <!-- Layered Glowing Magenta Smoke Clouds -->
+            <g>
+              <circle cx="28" cy="172" r="24" fill="url(#cloudDeep)" opacity="0.88" />
+              <circle cx="52" cy="168" r="22" fill="url(#cloudDeep)" opacity="0.9" />
+              <circle cx="24" cy="202" r="32" fill="url(#cloudMain)" />
+              <circle cx="58" cy="196" r="30" fill="url(#cloudMain)" />
+              <circle cx="92" cy="206" r="28" fill="url(#cloudMain)" />
+              <circle cx="122" cy="214" r="22" fill="url(#cloudDeep)" />
+              <circle cx="46" cy="220" r="34" fill="#FF1E8A" opacity="0.92" />
+              <circle cx="82" cy="222" r="28" fill="#FF77BA" opacity="0.88" />
+            </g>
+          </svg>
         </div>
-    </main>
 
-    <!-- =====================================================================
-         EASY CONFIGURATION & LIGHTWEIGHT CHATBOT SCRIPT
-    ====================================================================== -->
-    <script>
-        /**
-         * 🛠️ USER CONFIGURATION
-         * Tweak your destination URL, optional n8n webhook, or bot replies here.
-         */
-        const CONFIG = {
-            // Destination capture/overview link used in both the chat CTA and main button
-            captureUrl: "https://zilara.com/freeaccount.asp?sponsorsite=2075339",
+        <!-- Right: Kinetic Italic Typography -->
+        <div class="kinetic-stack">
+          <div class="kinetic-earn-row">
+            <span class="kinetic-earn">Earn</span>
+            <div class="kinetic-streaks" aria-hidden="true">
+              <span class="streak-bar"></span>
+              <span class="streak-bar"></span>
+              <span class="streak-bar"></span>
+            </div>
+          </div>
 
-            // Optional n8n Webhook URL (leave "" for pure static GitHub Pages mode).
-            // When set, every chat interaction sends a lightweight JSON event in the background.
-            n8nWebhookUrl: "",
+          <div id="realtimeWord" class="kinetic-realtime is-flashing">REALTIME</div>
 
-            // Bot greeting & quick-answer scripts (kept short so visitors click through fast)
-            botResponses: {
-                greeting: "Hey! 👋 Quick question — want to see how early FREE positioning works before spots fill up?",
-                
-                positioning: "Simple: you lock in a <strong>100% FREE pre-launch spot</strong> right now with zero credit card needed. As our leaders build momentum, anyone who joins after you falls <em>under</em> your spot in line! 👀",
-                
-                product: "We’re teaming up with top industry leaders on a <strong>clean, unique product line</strong> that hasn't hit the masses yet. Everything is laid out inside the quick Team Overview! 🚀",
-                
-                skip: "Love the speed! ⚡ Tap below to lock in your free spot right now before the next wave jumps in:",
-                
-                cost: "Zero! It is <strong>100% FREE</strong> to grab your pre-launch position — no card, no catch. 🙌",
-                
-                timing: "We are in <strong>live team pre-launch right now</strong>, which is why timing is huge — getting positioned early puts you ahead of the main rollout. 👀",
-                
-                fallback: "Great question! The short 2-minute overview lays out all the details and lets you lock in your <strong>FREE position</strong> right away. 👇"
-            }
+          <div class="kinetic-commissions">Commissions</div>
+
+          <div class="kinetic-free-row">
+            <span class="kinetic-free">FREE</span>
+            <span class="kinetic-to-start">to START</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Interactive "Team Pre-Launch Live Guide" Chat Card -->
+    <section id="chatSection" class="chat-section" aria-label="Team Pre-Launch Live Guide Chat">
+      <div class="chat-panel">
+        <div class="chat-header">
+          <div class="chat-header-left">
+            <div class="chat-avatar" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF77BA">
+                <path d="M13 2L4.09 12.97A1 1 0 004.86 14.5H11l-1 7.5 8.91-10.97a1 1 0 00-.77-1.53H13V2z" />
+              </svg>
+              <span class="chat-avatar-dot"></span>
+            </div>
+
+            <div>
+              <div class="chat-title-row">
+                <h2 class="chat-title">Team Pre-Launch Live Guide</h2>
+                <span class="chat-online">• Online</span>
+              </div>
+              <p class="chat-subtitle">Instant answers • Takes 10 seconds</p>
+            </div>
+          </div>
+
+          <span class="live-badge">LIVE</span>
+        </div>
+
+        <div id="chatFeed" class="chat-feed" aria-live="polite">
+          <div class="msg-row-bot">
+            <div class="bubble-bot">
+              Hey! 👋 Quick question — want to see how early <strong style="color:#ffffff;font-weight:800;">FREE</strong> positioning works before spots fill up?
+            </div>
+
+            <div id="quickChips" class="chips-wrap">
+              <button type="button" data-topic="product" class="chip-btn">
+                🚀 What's the product line?
+              </button>
+              <button type="button" data-topic="positioning" class="chip-btn">
+                🔒 How does FREE positioning work?
+              </button>
+              <button type="button" data-topic="skip" class="chip-btn chip-btn-skip">
+                ⚡ Skip chat — give me the link!
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form id="chatForm" class="chat-form">
+          <label for="chatInput" class="sr-only">Ask a quick question</label>
+          <input
+            id="chatInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Ask a quick question..."
+            class="chat-input"
+          />
+          <button type="submit" class="chat-send-btn">
+            <span>Send</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 4. Bottom Callout Box + Full-Width Pure Hot-Pink CTA + Reservation Sub-Note -->
+    <section class="bottom-section" aria-label="Reserve Your Free Position">
+      <div class="callout-card">
+        <p class="callout-text">
+          And it’s <span class="callout-pink-underline">FREE</span> to get positioned. Yes… <span class="callout-pink-underline">FREE</span>! 🙌
+          <span class="callout-pink">I just got started and it’s going NUTS!!!</span>
+        </p>
+      </div>
+
+      <a
+        href="https://zilara.com/freeaccount.asp?sponsorsite=2075339"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="main-cta-btn"
+      >
+        <span>Continue to Team Overview</span>
+        <span aria-hidden="true">→</span>
+      </a>
+
+      <p class="reservation-note">
+        <span class="reservation-check" aria-hidden="true">✓</span>
+        <span>Your free pre-launch spot is reserved · Check your inbox for next steps</span>
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      var SPONSOR_URL = 'https://zilara.com/freeaccount.asp?sponsorsite=2075339';
+
+      var pageShell = document.getElementById('pageShell');
+      var flightLayer = document.getElementById('rocketFlightLayer');
+      var flyingRocket = document.getElementById('flyingRocket');
+      var heroHeader = document.getElementById('heroHeader');
+      var promoBanner = document.getElementById('promoBanner');
+      var realtimeWord = document.getElementById('realtimeWord');
+      var chatSection = document.getElementById('chatSection');
+      var chatFeed = document.getElementById('chatFeed');
+      var chatForm = document.getElementById('chatForm');
+      var chatInput = document.getElementById('chatInput');
+
+      /* Stop REALTIME flash/enlarge loop as soon as user interacts with chat card */
+      function stopRealtimeFlash() {
+        if (realtimeWord && realtimeWord.classList.contains('is-flashing')) {
+          realtimeWord.classList.remove('is-flashing');
+        }
+      }
+
+      if (chatSection) {
+        chatSection.addEventListener('pointerenter', stopRealtimeFlash);
+        chatSection.addEventListener('pointerdown', stopRealtimeFlash);
+        chatSection.addEventListener('focusin', stopRealtimeFlash);
+      }
+      chatInput.addEventListener('focus', stopRealtimeFlash);
+      chatInput.addEventListener('input', stopRealtimeFlash);
+
+      /* ===================================================================
+         SECOND FLYING ROCKET CONTROLLER
+         - Starts at top even with headline, shoots straight up briefly
+         - Curves wide around the far left (clear of 'REALTIME' banner text)
+         - Cuts across the chat area and loops back up
+         - Hovers beside chat box when user focuses/types; turbo boosts on submit/chip
+         =================================================================== */
+      var mode = 'orbit'; // 'orbit' | 'hover' | 'turbo'
+      var orbitT = 0;
+      var turboT = 0;
+      var turboFromX = 40;
+      var turboFromY = 40;
+      var rx = 38;
+      var ry = 38;
+      var rAngle = 0;
+      var lastTime = performance.now();
+      var sparkAccum = 0;
+
+      function bezier1D(p0, p1, p2, p3, u) {
+        var inv = 1 - u;
+        return (
+          inv * inv * inv * p0 +
+          3 * inv * inv * u * p1 +
+          3 * inv * u * u * p2 +
+          u * u * u * p3
+        );
+      }
+
+      function sampleOrbitPath(t) {
+        var shellRect = pageShell.getBoundingClientRect();
+        var headRect = heroHeader.getBoundingClientRect();
+        var bannerRect = promoBanner.getBoundingClientRect();
+        var chatRect = chatSection.getBoundingClientRect();
+
+        var w = Math.max(300, shellRect.width);
+        var isMobile = w < 640;
+
+        var startX = isMobile ? 22 : 32;
+        var startY = headRect.top - shellRect.top + headRect.height * 0.45;
+        var upPeakY = Math.max(8, startY - (isMobile ? 28 : 38));
+
+        var leftMarginX = isMobile ? 6 : 8;
+        var midBannerY = bannerRect.top - shellRect.top + bannerRect.height * 0.52;
+
+        var chatEnterX = isMobile ? 16 : 24;
+        var chatCutY = chatRect.top - shellRect.top + chatRect.height * 0.42;
+        var chatExitX = w - (isMobile ? 20 : 34);
+        var chatExitY = chatRect.top - shellRect.top + chatRect.height * 0.62;
+
+        if (t < 0.16) {
+          var u1 = t / 0.16;
+          return {
+            x: startX,
+            y: startY + (upPeakY - startY) * (1 - Math.pow(1 - u1, 1.5))
+          };
+        } else if (t < 0.48) {
+          var u2 = (t - 0.16) / 0.32;
+          return {
+            x: bezier1D(startX, leftMarginX, leftMarginX, chatEnterX, u2),
+            y: bezier1D(upPeakY, upPeakY + 8, midBannerY, chatCutY, u2)
+          };
+        } else if (t < 0.76) {
+          var u3 = (t - 0.48) / 0.28;
+          return {
+            x: bezier1D(chatEnterX, w * 0.35, w * 0.72, chatExitX, u3),
+            y: bezier1D(chatCutY, chatCutY - 10, chatExitY + 12, chatExitY, u3)
+          };
+        } else {
+          var u4 = (t - 0.76) / 0.24;
+          return {
+            x: bezier1D(chatExitX, w * 0.42, leftMarginX, startX, u4),
+            y: bezier1D(chatExitY, chatRect.top - shellRect.top - 10, midBannerY - 20, startY, u4)
+          };
+        }
+      }
+
+      function sampleHoverPoint() {
+        var shellRect = pageShell.getBoundingClientRect();
+        var chatRect = chatSection.getBoundingClientRect();
+        var isMobile = shellRect.width < 640;
+        return {
+          x: isMobile ? 20 : 28,
+          y: chatRect.top - shellRect.top + 54
         };
+      }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatMessages = document.getElementById('chat-messages');
-            const initialTyping = document.getElementById('initial-typing');
-            const quickReplies = document.getElementById('quick-replies');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const primaryCtaBtn = document.getElementById('primary-cta-btn');
+      function emitSpark(x, y, headingDeg, turbo) {
+        if (!flightLayer) return;
+        var rad = ((headingDeg + 180) * Math.PI) / 180;
+        var tailDist = window.innerWidth < 640 ? 34 : 44;
+        var px = x + Math.cos(rad) * tailDist;
+        var py = y + Math.sin(rad) * tailDist;
 
-            // Sync primary CTA button with CONFIG.captureUrl
-            primaryCtaBtn.href = CONFIG.captureUrl;
+        var dot = document.createElement('span');
+        dot.className = 'exhaust-spark';
+        var size = turbo ? (Math.random() * 8 + 5) : (Math.random() * 5 + 3);
+        var palette = ['#ff1e8a', '#ff77ba', '#ffb0d8', '#ffffff'];
+        var color = palette[Math.floor(Math.random() * palette.length)];
 
-            let exchangeCount = 0;
-            let isBotReplying = false;
+        var spread = (Math.random() - 0.5) * 26;
+        var dx = Math.cos(rad) * (turbo ? 36 : 18) + spread;
+        var dy = Math.sin(rad) * (turbo ? 36 : 18) + spread;
 
-            // Optional non-blocking n8n webhook logger (ready for future SMS/lead workflows)
-            function pingN8n(eventType, detail) {
-                if (!CONFIG.n8nWebhookUrl || CONFIG.n8nWebhookUrl.trim() === "") return;
-                try {
-                    fetch(CONFIG.n8nWebhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            event: eventType,
-                            detail: detail,
-                            page: window.location.href,
-                            timestamp: new Date().toISOString()
-                        }),
-                        keepalive: true
-                    }).catch(() => {});
-                } catch (_) {}
-            }
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = px + 'px';
+        dot.style.top = py + 'px';
+        dot.style.background = color;
+        dot.style.boxShadow = '0 0 ' + (turbo ? 14 : 8) + 'px ' + color;
+        dot.style.setProperty('--dx', dx.toFixed(1) + 'px');
+        dot.style.setProperty('--dy', dy.toFixed(1) + 'px');
 
-            // Append a user message bubble
-            function appendUserMessage(text) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'flex justify-end animate-msg-in';
-                wrapper.innerHTML = `
-                    <div class="bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-semibold text-xs sm:text-sm rounded-2xl rounded-tr-sm px-3.5 py-2 max-w-[85%] shadow">
-                        ${escapeHtml(text)}
-                    </div>
-                `;
-                chatMessages.appendChild(wrapper);
-                scrollToBottom();
-            }
+        flightLayer.appendChild(dot);
+        setTimeout(function () {
+          if (dot.parentNode) dot.parentNode.removeChild(dot);
+        }, 620);
+      }
 
-            // Append a bot message bubble + inline CTA button
-            function appendBotMessage(htmlText, includeInlineCta = true) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'flex flex-col items-start space-y-2 animate-msg-in';
+      function pauseRocketBesideChat() {
+        if (mode === 'turbo') return;
+        mode = 'hover';
+        flyingRocket.classList.remove('is-turbo');
+        flyingRocket.classList.add('is-hovering');
+      }
 
-                let ctaHtml = '';
-                if (includeInlineCta) {
-                    ctaHtml = `
-                        <a href="${CONFIG.captureUrl}" 
-                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-md shadow-emerald-500/20 transition-all active:scale-95">
-                            <span>👉 Lock In Free Position Now &rarr;</span>
-                        </a>
-                    `;
-                }
+      function resumeRocketOrbit() {
+        if (mode === 'turbo') return;
+        mode = 'orbit';
+        flyingRocket.classList.remove('is-hovering');
+      }
 
-                wrapper.innerHTML = `
-                    <div class="bg-slate-900 border border-slate-800 text-slate-100 text-xs sm:text-sm leading-relaxed rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[92%] shadow-sm">
-                        ${htmlText}
-                    </div>
-                    ${ctaHtml}
-                `;
-                chatMessages.appendChild(wrapper);
-                scrollToBottom();
+      function triggerTurboBurst() {
+        mode = 'turbo';
+        turboT = 0;
+        turboFromX = rx;
+        turboFromY = ry;
+        flyingRocket.classList.remove('is-hovering');
+        flyingRocket.classList.add('is-turbo');
 
-                // Highlight the main CTA button below whenever an inline CTA is dropped
-                if (includeInlineCta) {
-                    primaryCtaBtn.classList.add('cta-spotlight');
-                }
-            }
+        for (var i = 0; i < 12; i++) {
+          emitSpark(rx, ry, rAngle + (Math.random() - 0.5) * 36, true);
+        }
+      }
 
-            // Show temporary typing indicator before bot responds
-            function replyWithDelay(htmlText, includeInlineCta = true, delayMs = 450) {
-                isBotReplying = true;
-                const typingEl = document.createElement('div');
-                typingEl.className = 'flex items-start space-x-2 animate-msg-in';
-                typingEl.innerHTML = `
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-sm px-3.5 py-2.5 inline-flex items-center space-x-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 typing-dot"></span>
-                    </div>
-                `;
-                chatMessages.appendChild(typingEl);
-                scrollToBottom();
+      function stepRocket(now) {
+        var dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
 
-                setTimeout(() => {
-                    typingEl.remove();
-                    appendBotMessage(htmlText, includeInlineCta);
-                    isBotReplying = false;
-                }, delayMs);
-            }
+        var tx = rx;
+        var ty = ry;
 
-            // Smart keyword matcher for free-typed questions
-            function getKeywordResponse(input) {
-                const q = input.toLowerCase();
-                if (q.includes('free') || q.includes('cost') || q.includes('price') || q.includes('pay') || q.includes('money') || q.includes('card')) {
-                    return CONFIG.botResponses.cost;
-                }
-                if (q.includes('product') || q.includes('sell') || q.includes('what is') || q.includes('zilara') || q.includes('company')) {
-                    return CONFIG.botResponses.product;
-                }
-                if (q.includes('position') || q.includes('work') || q.includes('spot') || q.includes('line') || q.includes('early') || q.includes('when')) {
-                    return CONFIG.botResponses.positioning;
-                }
-                if (q.includes('link') || q.includes('join') || q.includes('sign') || q.includes('start') || q.includes('go')) {
-                    return CONFIG.botResponses.skip;
-                }
-                return CONFIG.botResponses.fallback;
-            }
+        if (mode === 'orbit') {
+          orbitT = (orbitT + dt / 5.4) % 1;
+          var pt = sampleOrbitPath(orbitT);
+          tx = pt.x;
+          ty = pt.y;
 
-            function scrollToBottom() {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+          var dx = tx - rx;
+          var dy = ty - ry;
+          if (Math.hypot(dx, dy) > 0.2) {
+            rAngle = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
+          }
+          rx += dx * Math.min(1, dt * 14);
+          ry += dy * Math.min(1, dt * 14);
 
-            function escapeHtml(str) {
-                const div = document.createElement('div');
-                div.textContent = str;
-                return div.innerHTML;
-            }
+          sparkAccum += dt;
+          if (sparkAccum >= 0.06) {
+            sparkAccum = 0;
+            emitSpark(rx, ry, rAngle, false);
+          }
+        } else if (mode === 'hover') {
+          var hp = sampleHoverPoint();
+          tx = hp.x;
+          ty = hp.y + Math.sin(now / 260) * 4;
+          rx += (tx - rx) * Math.min(1, dt * 6);
+          ry += (ty - ry) * Math.min(1, dt * 6);
+          rAngle += (0 - rAngle) * Math.min(1, dt * 7);
+        } else if (mode === 'turbo') {
+          turboT += dt / 0.8;
+          var u = Math.min(1, turboT);
+          var ease = 1 - Math.pow(1 - u, 2.5);
+          var topPt = sampleOrbitPath(0.16);
+          var leftLane = pageShell.getBoundingClientRect().width < 640 ? 18 : 28;
 
-            // 1. Resolve initial typing indicator in 600ms into the punchy greeting + chips
-            setTimeout(() => {
-                if (initialTyping) initialTyping.remove();
-                appendBotMessage(CONFIG.botResponses.greeting, false);
-                quickReplies.classList.remove('hidden');
-            }, 600);
+          tx = bezier1D(turboFromX, leftLane, leftLane, topPt.x, ease);
+          ty = bezier1D(turboFromY, turboFromY - 75, topPt.y + 35, topPt.y, ease);
 
-            // 2. Handle Quick-Reply Chip Taps
-            document.querySelectorAll('.quick-chip').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if (isBotReplying) return;
-                    const topic = btn.getAttribute('data-topic');
-                    const label = btn.textContent.trim();
+          var tdx = tx - rx;
+          var tdy = ty - ry;
+          if (Math.hypot(tdx, tdy) > 0.2) {
+            rAngle = (Math.atan2(tdy, tdx) * 180) / Math.PI + 90;
+          }
+          rx = tx;
+          ry = ty;
 
-                    exchangeCount++;
-                    btn.remove(); // Remove tapped chip so remaining options stay clean
-                    if (quickReplies.children.length === 0) {
-                        quickReplies.classList.add('hidden');
-                    }
+          sparkAccum += dt;
+          if (sparkAccum >= 0.025) {
+            sparkAccum = 0;
+            emitSpark(rx, ry, rAngle, true);
+          }
 
-                    appendUserMessage(label);
-                    pingN8n('quick_reply', topic);
+          if (u >= 1) {
+            orbitT = 0.16;
+            mode = 'orbit';
+            flyingRocket.classList.remove('is-turbo');
+          }
+        }
 
-                    const reply = CONFIG.botResponses[topic] || CONFIG.botResponses.fallback;
-                    replyWithDelay(reply, true, topic === 'skip' ? 300 : 450);
-                });
-            });
+        flyingRocket.style.transform =
+          'translate3d(' + rx.toFixed(1) + 'px, ' + ry.toFixed(1) + 'px, 0) rotate(' + rAngle.toFixed(1) + 'deg)';
+        requestAnimationFrame(stepRocket);
+      }
 
-            // 3. Handle Custom Typed Questions
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (isBotReplying) return;
+      var initPt = sampleOrbitPath(0);
+      rx = initPt.x;
+      ry = initPt.y;
+      flyingRocket.style.transform = 'translate3d(' + rx.toFixed(1) + 'px, ' + ry.toFixed(1) + 'px, 0) rotate(0deg)';
+      requestAnimationFrame(stepRocket);
 
-                const text = chatInput.value.trim();
-                if (!text) return;
+      chatInput.addEventListener('focus', pauseRocketBesideChat);
+      chatInput.addEventListener('input', function () {
+        if (chatInput.value.trim().length > 0) {
+          pauseRocketBesideChat();
+        }
+      });
+      chatInput.addEventListener('blur', function () {
+        if (chatInput.value.trim().length === 0) {
+          resumeRocketOrbit();
+        }
+      });
 
-                chatInput.value = '';
-                exchangeCount++;
-                appendUserMessage(text);
-                pingN8n('chat_message', text);
+      /* ===================================================================
+         INTERACTIVE CHAT LOGIC
+         =================================================================== */
+      var RESPONSES = {
+        product: {
+          user: "🚀 What's the product line?",
+          html: "We’re partnering with proven business leaders on a <strong style='color:#ffffff;font-weight:800;'>clean, unique product line</strong> during an early team Pre-Launch wave — and locking in your spot is <strong style='color:#ff77ba;font-weight:800;'>100% FREE</strong>.",
+          chips: [
+            { topic: 'positioning', label: '🔒 How does FREE positioning work?' },
+            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
+          ]
+        },
+        positioning: {
+          user: '🔒 How does FREE positioning work?',
+          html: "Getting in early is key! 👀 You reserve your <strong style='color:#ff77ba;font-weight:800;'>FREE pre-launch position</strong> at zero cost so you can see the full Team Overview right away.",
+          chips: [
+            { topic: 'product', label: "🚀 What's the product line?" },
+            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
+          ]
+        },
+        skip: {
+          user: '⚡ Skip chat — give me the link!',
+          html: "Right this way! ⚡ Click below to open the <strong style='color:#ff77ba;font-weight:800;'>Team Overview</strong> and claim your free pre-launch spot:",
+          chips: []
+        }
+      };
 
-                // Keep exchanges tight: after 2 back-and-forths, always steer straight to the link
-                const reply = exchangeCount >= 2 
-                    ? `${getKeywordResponse(text)}<br><span class="text-emerald-300 font-semibold">Tap below so you don’t lose your spot in line!</span>`
-                    : getKeywordResponse(text);
-
-                replyWithDelay(reply, true, 450);
-            });
-
-            // Log primary CTA clicks if n8n webhook is enabled
-            primaryCtaBtn.addEventListener('click', () => {
-                pingN8n('cta_click', CONFIG.captureUrl);
-            });
+      function scrollChatDown() {
+        requestAnimationFrame(function () {
+          chatFeed.scrollTop = chatFeed.scrollHeight;
         });
-    </script>
+      }
+
+      function removeInitialChips() {
+        var chipsEl = document.getElementById('quickChips');
+        if (chipsEl && chipsEl.parentNode) {
+          chipsEl.parentNode.removeChild(chipsEl);
+        }
+      }
+
+      function addUserBubble(text) {
+        var row = document.createElement('div');
+        row.className = 'msg-row-user';
+        var bubble = document.createElement('div');
+        bubble.className = 'bubble-user';
+        bubble.textContent = text;
+        row.appendChild(bubble);
+        chatFeed.appendChild(row);
+        scrollChatDown();
+      }
+
+      function addBotBubble(html, chips) {
+        var row = document.createElement('div');
+        row.className = 'msg-row-bot';
+
+        var bubble = document.createElement('div');
+        bubble.className = 'bubble-bot';
+        bubble.innerHTML = html;
+        row.appendChild(bubble);
+
+        var linkBtn = document.createElement('a');
+        linkBtn.href = SPONSOR_URL;
+        linkBtn.target = '_blank';
+        linkBtn.rel = 'noopener noreferrer';
+        linkBtn.className = 'chat-inline-cta';
+        linkBtn.textContent = '👉 Continue to Team Overview →';
+        row.appendChild(linkBtn);
+
+        if (chips && chips.length > 0) {
+          var wrap = document.createElement('div');
+          wrap.className = 'chips-wrap';
+          chips.forEach(function (c) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = c.topic === 'skip' ? 'chip-btn chip-btn-skip' : 'chip-btn';
+            btn.textContent = c.label;
+            btn.addEventListener('click', function () {
+              handleTopicClick(c.topic);
+            });
+            wrap.appendChild(btn);
+          });
+          row.appendChild(wrap);
+        }
+
+        chatFeed.appendChild(row);
+        scrollChatDown();
+      }
+
+      function handleTopicClick(topic) {
+        var entry = RESPONSES[topic];
+        if (!entry) return;
+        removeInitialChips();
+        triggerTurboBurst();
+        addUserBubble(entry.user);
+
+        setTimeout(function () {
+          addBotBubble(entry.html, entry.chips);
+          if (topic === 'skip') {
+            window.open(SPONSOR_URL, '_blank', 'noopener,noreferrer');
+          }
+        }, 180);
+      }
+
+      function answerCustomQuestion(q) {
+        var lower = q.toLowerCase();
+        if (lower.indexOf('product') !== -1 || lower.indexOf('line') !== -1) {
+          return RESPONSES.product;
+        }
+        if (lower.indexOf('free') !== -1 || lower.indexOf('cost') !== -1 || lower.indexOf('position') !== -1 || lower.indexOf('spot') !== -1) {
+          return RESPONSES.positioning;
+        }
+        return {
+          html: "It’s <strong style='color:#ff77ba;font-weight:800;'>FREE</strong> to get positioned early in our team Pre-Launch! Tap below to check out the full Team Overview:",
+          chips: [
+            { topic: 'product', label: "🚀 What's the product line?" },
+            { topic: 'positioning', label: '🔒 How does FREE positioning work?' },
+            { topic: 'skip', label: '⚡ Skip chat — give me the link!' }
+          ]
+        };
+      }
+
+      var presetButtons = document.querySelectorAll('[data-topic]');
+      for (var i = 0; i < presetButtons.length; i++) {
+        presetButtons[i].addEventListener('click', function () {
+          handleTopicClick(this.getAttribute('data-topic'));
+        });
+      }
+
+      chatForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var text = chatInput.value.trim();
+        if (!text) return;
+
+        removeInitialChips();
+        triggerTurboBurst();
+        addUserBubble(text);
+        chatInput.value = '';
+        chatInput.blur();
+
+        var reply = answerCustomQuestion(text);
+        setTimeout(function () {
+          addBotBubble(reply.html, reply.chips);
+        }, 200);
+      });
+    })();
+  </script>
 </body>
 </html>
